@@ -1,0 +1,15 @@
+# build output
+target/
+
+# IDE
+.vscode/
+.idea/
+*.launch
+*.sublime-workspace
+*.iml
+*.swp
+.history/
+
+# macOS junk
+.DS_Store
+Thumbs.db
