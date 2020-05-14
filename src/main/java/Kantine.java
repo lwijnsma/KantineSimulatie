@@ -15,17 +15,27 @@ public class Kantine {
      * In deze methode wordt een Persoon en Dienblad gemaakt en aan elkaar gekoppeld. Maak twee
      * Artikelen aan en plaats deze op het dienblad. Tenslotte sluit de Persoon zich aan bij de rij
      * voor de kassa.
+     *
+     *
      */
+    //TODO geef persoon en artikel waarden
+
     public void loopPakSluitAan() {
-        // method body omitted
+        Persoon persoon = new Persoon();
+        Dienblad dienblad = new Dienblad(persoon);
+        Artikel artikel1 = new Artikel();
+        Artikel artikel2 = new Artikel();
+        dienblad.voegToe(artikel1);
+        dienblad.voegToe(artikel2);
+        kassarij.sluitAchteraan(dienblad);
     }
 
     /**
      * Deze methode handelt de rij voor de kassa af.
      */
     public void verwerkRijVoorKassa() {
-        while () {
-            // omitted
+        while (kassarij.erIsEenRij()) {
+            kassa.rekenAf(kassarij.eerstePersoonInRij());
         }
     }
 
@@ -35,7 +45,7 @@ public class Kantine {
      * @return hoeveelheid geld in kassa
      */
     public double hoeveelheidGeldInKassa() {
-        // method body omitted
+        return kassa.hoeveelheidGeldInKassa();
     }
 
     /**
@@ -44,7 +54,7 @@ public class Kantine {
      * @return het aantal gepasseerde artikelen
      */
     public int aantalArtikelen() {
-        // method body omitted
+        return kassa.aantalArtikelen();
     }
 
     /**
@@ -52,6 +62,6 @@ public class Kantine {
      * de kassa.
      */
     public void resetKassa() {
-        // method body omitted
+        kassa.resetKassa();
     }
 }
