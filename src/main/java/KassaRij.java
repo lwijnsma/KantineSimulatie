@@ -7,6 +7,11 @@ public class KassaRij {
     /**
      * Constructor
      */
+
+    public KassaRij() {
+        
+    }
+
     public KassaRij(ArrayList<Dienblad> rij) {
         this.rij = rij;
     }
