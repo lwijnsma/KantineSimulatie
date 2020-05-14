@@ -73,7 +73,7 @@ public class Datum {
 			case 12: maandString = "December"; break;
 			default: maandString = ""; break;
 		}
-		datumString = dagString + dag + maandString + jaar;
+		datumString = dagString +" "+ dag +" "+ maandString +" "+ jaar;
 		return datumString;
 	}
 
