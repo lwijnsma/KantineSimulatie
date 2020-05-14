@@ -8,6 +8,10 @@ public class Artikel {
         this.prijs = prijs;
     }
 
+    public String toString() {
+        return naam + " " + prijs;
+    }
+
     public String getNaam() {
         return naam;
     }
