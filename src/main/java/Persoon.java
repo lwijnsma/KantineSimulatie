@@ -6,6 +6,10 @@ public class Persoon {
     private Datum geboortedatum;
     private char geslacht;
 
+    public Persoon() {
+        
+    }
+
     public Persoon(int BSN, String voornaam, String achternaam, Datum geboortedatum, char geslacht) {
         this.BSN = BSN;
         this.voornaam = voornaam;
