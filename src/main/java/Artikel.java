@@ -1,7 +1,7 @@
 public class Artikel {
 
-    public String naam;
-    public Double prijs;
+    private String naam;
+    private Double prijs;
 
     public Artikel(String naam, Double prijs) {
         this.naam = naam;
