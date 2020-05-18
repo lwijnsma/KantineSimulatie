@@ -4,12 +4,13 @@ public class Kassa {
 
     private int aantalTotaal;
     private double geldTotaal;
+    private KassaRij kassaRij;
 
     /**
      * Constructor
      */
-    public Kassa(KassaRij kassarij) {
-        // method body omitted
+    public Kassa(KassaRij kassaRij) {
+        this.kassaRij = kassaRij;
     }
 
     /**
