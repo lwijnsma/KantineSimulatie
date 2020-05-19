@@ -4,10 +4,10 @@ import java.util.LinkedList;
 public class KassaRij {
 
     private ArrayList<Dienblad> rij;
+    
     /**
      * Constructor
      */
-
     public KassaRij() {
         
     }
