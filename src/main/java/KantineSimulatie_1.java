@@ -17,7 +17,7 @@ public class KantineSimulatie {
      *
      * @param dagen
      */
-    public void Simuleer(int dagen) {
+    public void simuleer(int dagen) {
 
         // herhaal voor elke dag
         for (int i = 0; ;i++) {
@@ -45,12 +45,13 @@ public class KantineSimulatie {
      */
     public static void main(String[] args) {
         int dagen;
+        KantineSimulatie kantineSimulatie = new KantineSimulatie();
 
         if (args.length == 0) {
             dagen = DAGEN;
         } else {
             dagen = Integer.parseInt(args[0]);
         }
-        simuleer(dagen);
+        kantineSimulatie.simuleer(dagen);
     }
 }
