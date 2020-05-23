@@ -13,7 +13,7 @@ public class Persoon {
         this.voornaam = voornaam;
         this.achternaam = achternaam;
         this.geboortedatum = geboortedatum;
-        setGeslacht(char geslacht);
+        setGeslacht(geslacht);
     }
 
     public String toString() {
@@ -42,7 +42,7 @@ public class Persoon {
         } else this.geslacht = 'O';
     }
 
-    public int getBSN() {
+    public String getBSN() {
         return BSN;
     }
 
