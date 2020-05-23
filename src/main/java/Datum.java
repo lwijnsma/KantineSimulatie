@@ -25,9 +25,12 @@ public class Datum {
 				case 4: case 6: case 9: case 11:
 					return dag <= 30;
 				case 2:
-					if((jaar % 4) == 0) {
-					return dag <= 29;
+					if((jaar % 400) == 0) {
+					return dag <= 28;
 					}
+					else if((jaar % 4) == 0){
+					  return dag <= 29;
+          }
 					else if((jaar % 100) == 0) {
 						return dag <= 28;
 					}
