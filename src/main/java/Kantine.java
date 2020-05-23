@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Kantine {
 
     private Kassa kassa;
@@ -21,10 +23,12 @@ public class Kantine {
     //TODO geef persoon en artikel waarden
 
     public void loopPakSluitAan() {
-        Persoon persoon = new Persoon();
+        Random rand = new Random();
+        Datum datum = new Datum(1, 1, 2003);
+        Persoon persoon = new Persoon(rand.nextInt(10),"John", "Doh", datum, 'M');
         Dienblad dienblad = new Dienblad(persoon);
-        Artikel artikel1 = new Artikel();
-        Artikel artikel2 = new Artikel();
+        Artikel artikel1 = new Artikel("friet",10.00);
+        Artikel artikel2 = new Artikel("cola", 0.80);
         dienblad.voegToe(artikel1);
         dienblad.voegToe(artikel2);
         kassarij.sluitAchteraan(dienblad);
