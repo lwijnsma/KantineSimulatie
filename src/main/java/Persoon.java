@@ -1,6 +1,6 @@
 public class Persoon {
     
-    private String BSN;
+    private long BSN;
     private String voornaam;
     private String achternaam;
     private Datum geboortedatum;
@@ -8,7 +8,7 @@ public class Persoon {
 
     public Persoon() {} // Lege constructor
 
-    public Persoon(String BSN, String voornaam, String achternaam, Datum geboortedatum, char geslacht) {
+    public Persoon(long BSN, String voornaam, String achternaam, Datum geboortedatum, char geslacht) {
         this.BSN = BSN;
         this.voornaam = voornaam;
         this.achternaam = achternaam;
@@ -20,7 +20,7 @@ public class Persoon {
         return BSN + " " + voornaam + " " + achternaam + " " + getGeboortedatum() + " " + getGeslacht();
     }
 
-    public void setBSN(String BSN) {
+    public void setBSN(long BSN) {
         this.BSN = BSN;
     }
 
@@ -42,7 +42,7 @@ public class Persoon {
         } else this.geslacht = 'O';
     }
 
-    public String getBSN() {
+    public long getBSN() {
         return BSN;
     }
 
