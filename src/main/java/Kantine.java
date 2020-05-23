@@ -4,6 +4,7 @@ public class Kantine {
 
     private Kassa kassa;
     private KassaRij kassarij;
+    private KantineAanbod kantineaanbod;
 
     /**
      * Constructor
@@ -14,24 +15,15 @@ public class Kantine {
     }
 
     /**
-     * In deze methode wordt een Persoon en Dienblad gemaakt en aan elkaar gekoppeld. Maak twee
-     * Artikelen aan en plaats deze op het dienblad. Tenslotte sluit de Persoon zich aan bij de rij
-     * voor de kassa.
+     * 2
+     * In deze methode wordt een dienblad met artikelen
+     * in de kassarij geplaatst.
      *
-     *
+     * @paramdienblad
      */
-    //TODO geef persoon en artikel waarden
 
-    public void loopPakSluitAan() {
-        Random rand = new Random();
-        Datum datum = new Datum(1, 1, 2003);
-        Persoon persoon = new Persoon(rand.nextInt(10),"John", "Doh", datum, 'M');
-        Dienblad dienblad = new Dienblad(persoon);
-        Artikel artikel1 = new Artikel("friet",10.00);
-        Artikel artikel2 = new Artikel("cola", 0.80);
-        dienblad.voegToe(artikel1);
-        dienblad.voegToe(artikel2);
-        kassarij.sluitAchteraan(dienblad);
+    public void loopPakSluitAan(Dienblad dienblad,String[] artikelnamen) {
+        //method body omitted
     }
 
     /**
@@ -42,7 +34,6 @@ public class Kantine {
             kassa.rekenAf(kassarij.eerstePersoonInRij());
         }
     }
-
     /**
      * Deze methode telt het geld uit de kassa
      *
@@ -60,6 +51,10 @@ public class Kantine {
     public int aantalArtikelen() {
         return kassa.aantalArtikelen();
     }
+
+    public KantineAanbod getKantineAanbod() { return kantineaanbod; }
+
+    public void setKantineAanbod(KantineAanbod kantineaanbod) { this.kantineaanbod = kantineaanbod; }
 
     /**
      * Deze methode reset de bijgehouden telling van het aantal artikelen en "leegt" de inhoud van
