@@ -21,8 +21,12 @@ public class Kassa {
      * @param klant die moet afrekenen
      */
     public void rekenAf(Dienblad klant) {
-        aantalTotaal += klant.getAantalArtikelen();
-        geldTotaal += klant.getTotaalPrijs();
+        Iterator<Artikel> dienblad = klant.getDienblad();
+        while (dienblad.hasNext()) {
+        aantalTotaal++;
+        geldTotaal += dienblad.next().getPrijs();
+        }
+        
     }
 
     /**
@@ -53,4 +57,5 @@ public class Kassa {
         aantalTotaal = 0;
         geldTotaal = 0;
     }
+
 }
