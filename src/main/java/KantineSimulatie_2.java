@@ -1,3 +1,5 @@
+import javax.imageio.plugins.jpeg.JPEGImageReadParam;
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class KantineSimulatie {
@@ -113,6 +115,8 @@ public class KantineSimulatie {
                 // maak persoon en dienblad aan, koppel ze
                 // en bedenk hoeveel artikelen worden gepakt
                 int aantalartikelen = ... ;
+                Persoon persoon = new Persoon();
+                Dienblad dienblad = new Dienblad(persoon);
 
                 // genereer de "artikelnummers", dit zijn indexen
                 // van de artikelnamen
@@ -125,16 +129,19 @@ public class KantineSimulatie {
 
                 // loop de kantine binnen, pak de gewenste
                 // artikelen, sluit aan
+                kantine.loopPakSluitAan(dienblad, artikelen);
 
             }
 
             // verwerk rij voor de kassa
-
+            kantine.verwerkRijVoorKassa();
             // druk de dagtotalen af en hoeveel personen binnen
-
             // zijn gekomen
-
+            System.out.println(aantalpersonen);
+            System.out.println(kantine.aantalArtikelen());
+            System.out.println(kantine.hoeveelheidGeldInKassa());
             // reset de kassa voor de volgende dag
+            kantine.resetKassa();
 
         }
     }
