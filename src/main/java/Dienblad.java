@@ -3,7 +3,7 @@ import java.util.Iterator;
 import java.util.Stack;
 
 public class Dienblad {
-    private ArrayList<Artikel> artikelen;
+    private Stack<Artikel> artikelen;
     private Persoon klant;
     
     /**
@@ -23,7 +23,7 @@ public class Dienblad {
      * @param artikel
      */
     public void voegToe(Artikel artikel) {
-        artikelen.add(artikel);
+        artikelen.push(artikel);
     }
 
     /**
