@@ -2,7 +2,7 @@ import javax.imageio.plugins.jpeg.JPEGImageReadParam;
 import java.lang.reflect.Array;
 import java.util.*;
 
-public class KantineSimulatie {
+public class KantineSimulatie_2 {
 
     // kantine
     private Kantine kantine;
@@ -15,6 +15,9 @@ public class KantineSimulatie {
 
     // aantal artikelen
     private static final int AANTAL_ARTIKELEN = 4;
+
+    // aantqal dagen
+    private static final int DAGEN = 10;
 
     // artikelen
     private static final String[] artikelnamen =
@@ -39,7 +42,7 @@ public class KantineSimulatie {
      * Constructor
      *
      */
-    public KantineSimulatie() {
+    public KantineSimulatie_2() {
         kantine = new Kantine();
         random = new Random();
         int[] hoeveelheden =
@@ -144,5 +147,18 @@ public class KantineSimulatie {
             kantine.getKassa().resetKassa();
 
         }
+
+    }
+    public static void main(String[] args) {
+        int dagen;
+        KantineSimulatie_1 kantineSimulatie = new KantineSimulatie_1();
+
+        if (args.length == 0) {
+            dagen = DAGEN;
+        } else {
+            dagen = Integer.parseInt(args[0]);
+        }
+        kantineSimulatie.simuleer(dagen);
     }
 }
+
