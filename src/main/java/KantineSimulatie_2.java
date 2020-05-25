@@ -129,7 +129,6 @@ public class KantineSimulatie {
 
                 // loop de kantine binnen, pak de gewenste
                 // artikelen, sluit aan
-                Artikel
                 kantine.loopPakSluitAan(dienblad, artikelen);
 
             }
@@ -139,10 +138,10 @@ public class KantineSimulatie {
             // druk de dagtotalen af en hoeveel personen binnen
             // zijn gekomen
             System.out.println(aantalpersonen);
-            System.out.println(kantine.aantalArtikelen());
-            System.out.println(kantine.hoeveelheidGeldInKassa());
+            System.out.println(kantine.getKassa().aantalArtikelen());
+            System.out.println(kantine.getKassa().hoeveelheidGeldInKassa());
             // reset de kassa voor de volgende dag
-            kantine.resetKassa();
+            kantine.getKassa().resetKassa();
 
         }
     }
