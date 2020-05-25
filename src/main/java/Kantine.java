@@ -23,7 +23,11 @@ public class Kantine {
      */
 
     public void loopPakSluitAan(Dienblad dienblad,String[] artikelnamen) {
-        //method body omitted
+        int size = artikelnamen.length;
+        for (int i=0;i<size ;i++){
+            dienblad.voegToe(kantineaanbod.getArtikel(artikelnamen[i]));
+        }
+        kassarij.sluitAchteraan(dienblad);
     }
 
     /**
