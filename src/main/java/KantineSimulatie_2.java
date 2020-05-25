@@ -107,14 +107,14 @@ public class KantineSimulatie {
         for(int i = 0; i < dagen; i++) {
 
             // bedenk hoeveel personen vandaag binnen lopen
-            int aantalpersonen = ... ;
+            int aantalpersonen = 20 ;
 
             // laat de personen maar komen...
             for (int j = 0; j < aantalpersonen; j++) {
 
                 // maak persoon en dienblad aan, koppel ze
                 // en bedenk hoeveel artikelen worden gepakt
-                int aantalartikelen = ... ;
+                int aantalartikelen = 3 ;
                 Persoon persoon = new Persoon();
                 Dienblad dienblad = new Dienblad(persoon);
 
@@ -129,6 +129,7 @@ public class KantineSimulatie {
 
                 // loop de kantine binnen, pak de gewenste
                 // artikelen, sluit aan
+                Artikel
                 kantine.loopPakSluitAan(dienblad, artikelen);
 
             }
