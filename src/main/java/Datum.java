@@ -31,7 +31,7 @@ public class Datum {
 					else if((jaar % 4) == 0 && (jaar % 100) != 0) {
 					  return dag <= 29;
           }
-					else if((jaar % 100) == 0 && ) {
+					else if((jaar % 100) == 0) {
 						return dag <= 28;
 					}
 					else return false;

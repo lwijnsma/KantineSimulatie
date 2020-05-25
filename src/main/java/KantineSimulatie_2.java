@@ -1,5 +1,4 @@
 import javax.imageio.plugins.jpeg.JPEGImageReadParam;
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class KantineSimulatie_2 {

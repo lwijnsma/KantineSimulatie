@@ -1,5 +1,3 @@
-import java.util.Random;
-
 public class Kantine {
 
     private Kassa kassa;
@@ -19,13 +17,12 @@ public class Kantine {
      * In deze methode wordt een dienblad met artikelen
      * in de kassarij geplaatst.
      *
-     * @paramdienblad
+     * @param dienblad, artikelnamen[]
      */
 
     public void loopPakSluitAan(Dienblad dienblad,String[] artikelnamen) {
-        int size = artikelnamen.length;
-        for (int i=0;i<size ;i++){
-            dienblad.voegToe(kantineaanbod.getArtikel(artikelnamen[i]));
+        for (String artikelnaam : artikelnamen) {
+            dienblad.voegToe(kantineaanbod.getArtikel(artikelnaam));
         }
         kassarij.sluitAchteraan(dienblad);
     }
