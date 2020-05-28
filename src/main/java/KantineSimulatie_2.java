@@ -1,4 +1,3 @@
-import javax.imageio.plugins.jpeg.JPEGImageReadParam;
 import java.util.*;
 
 public class KantineSimulatie_2 {
@@ -150,7 +149,7 @@ public class KantineSimulatie_2 {
     }
     public static void main(String[] args) {
         int dagen;
-        KantineSimulatie_1 kantineSimulatie = new KantineSimulatie_1();
+        KantineSimulatie_2 kantineSimulatie = new KantineSimulatie_2();
 
         if (args.length == 0) {
             dagen = DAGEN;
