@@ -1,30 +1,26 @@
 public class Persoon {
     
-    private int BSN;
+    private long BSN;
     private String voornaam;
     private String achternaam;
     private Datum geboortedatum;
     private char geslacht;
 
-    public Persoon() {
-        
-    }
+    public Persoon() {} // Lege constructor
 
-    public Persoon(int BSN, String voornaam, String achternaam, Datum geboortedatum, char geslacht) {
+    public Persoon(long BSN, String voornaam, String achternaam, Datum geboortedatum, char geslacht) {
         this.BSN = BSN;
         this.voornaam = voornaam;
         this.achternaam = achternaam;
         this.geboortedatum = geboortedatum;
-        if (geslacht == 'M' || geslacht == 'V') {
-            this.geslacht = geslacht;
-        } else this.geslacht = 'O';
+        setGeslacht(geslacht);
     }
 
     public String toString() {
         return BSN + " " + voornaam + " " + achternaam + " " + getGeboortedatum() + " " + getGeslacht();
     }
 
-    public void setBSN(int BSN) {
+    public void setBSN(long BSN) {
         this.BSN = BSN;
     }
 
@@ -46,7 +42,7 @@ public class Persoon {
         } else this.geslacht = 'O';
     }
 
-    public int getBSN() {
+    public long getBSN() {
         return BSN;
     }
 

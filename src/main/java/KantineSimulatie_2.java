@@ -1,6 +1,7 @@
+import javax.imageio.plugins.jpeg.JPEGImageReadParam;
 import java.util.*;
 
-public class KantineSimulatie {
+public class KantineSimulatie_2 {
 
     // kantine
     private Kantine kantine;
@@ -13,6 +14,9 @@ public class KantineSimulatie {
 
     // aantal artikelen
     private static final int AANTAL_ARTIKELEN = 4;
+
+    // aantqal dagen
+    private static final int DAGEN = 10;
 
     // artikelen
     private static final String[] artikelnamen =
@@ -37,7 +41,7 @@ public class KantineSimulatie {
      * Constructor
      *
      */
-    public KantineSimulatie() {
+    public KantineSimulatie_2() {
         kantine = new Kantine();
         random = new Random();
         int[] hoeveelheden =
@@ -105,18 +109,20 @@ public class KantineSimulatie {
         for(int i = 0; i < dagen; i++) {
 
             // bedenk hoeveel personen vandaag binnen lopen
-            int aantalpersonen = ... ;
+            int aantalpersonen = 20 ;
 
             // laat de personen maar komen...
             for (int j = 0; j < aantalpersonen; j++) {
 
                 // maak persoon en dienblad aan, koppel ze
                 // en bedenk hoeveel artikelen worden gepakt
-                int aantalartikelen = ... ;
+                int aantalartikelen = 3 ;
+                Persoon persoon = new Persoon();
+                Dienblad dienblad = new Dienblad(persoon);
 
                 // genereer de "artikelnummers", dit zijn indexen
                 // van de artikelnamen
-                array int[] tepakken = getRandomArray(
+                    int[] tepakken = getRandomArray(
                     aantalartikelen, 0, AANTAL_ARTIKELEN-1);
 
                 // vind de artikelnamen op basis van
@@ -125,17 +131,33 @@ public class KantineSimulatie {
 
                 // loop de kantine binnen, pak de gewenste
                 // artikelen, sluit aan
+                kantine.loopPakSluitAan(dienblad, artikelen);
 
             }
 
             // verwerk rij voor de kassa
-
+            kantine.verwerkRijVoorKassa();
             // druk de dagtotalen af en hoeveel personen binnen
-
             // zijn gekomen
-
+            System.out.println(aantalpersonen);
+            System.out.println(kantine.getKassa().aantalArtikelen());
+            System.out.println(kantine.getKassa().hoeveelheidGeldInKassa());
             // reset de kassa voor de volgende dag
+            kantine.getKassa().resetKassa();
 
         }
+
+    }
+    public static void main(String[] args) {
+        int dagen;
+        KantineSimulatie_1 kantineSimulatie = new KantineSimulatie_1();
+
+        if (args.length == 0) {
+            dagen = DAGEN;
+        } else {
+            dagen = Integer.parseInt(args[0]);
+        }
+        kantineSimulatie.simuleer(dagen);
     }
 }
+

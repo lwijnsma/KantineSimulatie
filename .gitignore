@@ -9,6 +9,8 @@ target/
 *.iml
 *.swp
 .history/
+.classpath
+.project
 
 # macOS junk
 .DS_Store
