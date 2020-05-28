@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Stack;
 
@@ -16,7 +15,6 @@ public class Dienblad {
     public Dienblad(Persoon klant) {
         this.klant = klant;
     }
-
     /**
      * Methode om artikel aan dienblad toe te voegen
      *
