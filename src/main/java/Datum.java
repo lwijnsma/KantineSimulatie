@@ -26,9 +26,9 @@ public class Datum {
 					return dag <= 30;
 				case 2:
 					if((jaar % 400) == 0) {
-					return dag <= 28;
+					return dag <= 29;
 					}
-					else if((jaar % 4) == 0){
+					else if((jaar % 4) == 0 && (jaar % 100) != 0) {
 					  return dag <= 29;
           }
 					else if((jaar % 100) == 0) {
@@ -49,17 +49,6 @@ public class Datum {
 	 */
 	public String getDatumAsString() {
 		String datumString;
-		String dagString;
-		switch (dag) {
-			case 1: dagString = "Maandag"; break;
-			case 2: dagString = "Dinsdag"; break;
-			case 3: dagString = "Woendsdag"; break;
-			case 4: dagString = "Donderdag"; break;
-			case 5: dagString = "Vrijdag"; break;
-			case 6: dagString = "Zaterdag"; break;
-			case 7: dagString = "Zondag"; break;
-			default: dagString = ""; break;
-		}
 		String maandString;
 		switch (maand) {
 			case 1: maandString = "Januari"; break;
@@ -76,7 +65,7 @@ public class Datum {
 			case 12: maandString = "December"; break;
 			default: maandString = ""; break;
 		}
-		datumString = dagString +" "+ dag +" "+ maandString +" "+ jaar;
+		datumString = dag +" "+ maandString +" "+ jaar;
 		return datumString;
 	}
 

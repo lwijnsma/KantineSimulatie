@@ -3,16 +3,16 @@ import java.util.LinkedList;
 
 public class KassaRij {
 
-    private ArrayList<Dienblad> rij;
+    private LinkedList<Dienblad> rij;
+    
     /**
      * Constructor
      */
-
     public KassaRij() {
         
     }
 
-    public KassaRij(ArrayList<Dienblad> rij) {
+    public KassaRij(LinkedList<Dienblad> rij) {
         this.rij = rij;
     }
 
