@@ -1,5 +1,7 @@
 public class Administratie {
 
+    private static final int DAYS_IN_WEEK = 7;
+
     /**
      * Deze methode berekent van de int array aantal de gemiddelde waarde
      *
@@ -7,7 +9,16 @@ public class Administratie {
      * @return het gemiddelde
      */
     public double berekenGemiddeldAantal(int[] aantal) {
-        // method body omitted
+        int aantalGetallen = aantal.length;
+        int totaal = 0;
+        for(int getal : aantal){
+            totaal = totaal + getal;
+        }
+        if (totaal != 0 && aantalGetallen != 0) {
+            return totaal / aantalGetallen;
+        }
+        else
+            return 0;
     }
 
     /**
@@ -17,7 +28,16 @@ public class Administratie {
      * @return het gemiddelde
      */
     public double berekenGemiddeldeOmzet(double[] omzet) {
-        // method body omitted
+        int aantalGetallen = omzet.length;
+        double totaal = 0;
+        for(double prijs : omzet){
+            totaal += prijs;
+        }
+        if (totaal != 0 && aantalGetallen != 0) {
+            return totaal / aantalGetallen;
+        }
+        else
+            return 0;
     }
 
     /**
@@ -29,14 +49,11 @@ public class Administratie {
 
     public static double[] berekenDagOmzet(double[] omzet) {
         double[] temp = new double[7];
-        for(int i = 0; i < 7; i++) {
-
+        for(int i = 0; i < DAYS_IN_WEEK; i++) {
             int j = 0;
-            while ( ... ) {
-                temp[i] += omzet[i + 7 * j];
-
-                // omitted
-
+            while (i == j) {
+                temp[i] += omzet[i + DAYS_IN_WEEK * j];
+                j++;
             }
         }
         return temp;
