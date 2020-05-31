@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 import java.util.*;
 
 public class KantineSimulatie_2 {
@@ -140,7 +141,8 @@ public class KantineSimulatie_2 {
             // zijn gekomen
             System.out.println(aantalpersonen);
             System.out.println(kantine.getKassa().aantalArtikelen());
-            System.out.println(kantine.getKassa().hoeveelheidGeldInKassa());
+            DecimalFormat df = new DecimalFormat("#######.00");
+            System.out.println(df.format(kantine.getKassa().hoeveelheidGeldInKassa()));
             // reset de kassa voor de volgende dag
             kantine.getKassa().resetKassa();
 
