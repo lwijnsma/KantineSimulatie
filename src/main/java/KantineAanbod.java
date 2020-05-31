@@ -49,7 +49,7 @@ public class KantineAanbod {
      * Private methode om een Artikel van de stapel artikelen af te pakken. Retourneert null als de
      * stapel leeg is.
      */
-    private Artikel getArtikel(ArrayList<Artikel> stapel) {
+    private Artikel getArtikelFromlist(ArrayList<Artikel> stapel) {
         if (stapel == null) {
             return null;
         }
@@ -68,10 +68,10 @@ public class KantineAanbod {
      * Publieke methode om een artikel via naam van de stapel te pakken. Retouneert null als artikel
      * niet bestaat of niet op voorraad is.
      *
-     * @param naam (van artikel)
+     * @param productnaam (van artikel)
      * @return artikel (of null)
      */
     public Artikel getArtikel(String productnaam) {
-        return getArtikel(getArrayList(productnaam));
+        return getArtikelFromlist(getArrayList(productnaam));
     }
 }
