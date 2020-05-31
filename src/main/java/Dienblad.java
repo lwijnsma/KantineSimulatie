@@ -4,7 +4,7 @@ import java.util.Stack;
 public class Dienblad {
     private Stack<Artikel> artikelen;
     private Persoon klant;
-    
+
     /**
      * Constructor
      */
@@ -13,6 +13,7 @@ public class Dienblad {
     }
 
     public Dienblad(Persoon klant) {
+        artikelen = new Stack<>();
         this.klant = klant;
     }
     /**
@@ -31,7 +32,7 @@ public class Dienblad {
     public void setKlant(Persoon klant) {
         this.klant = klant;
     }
-    
+
     public Iterator<Artikel> getDienblad() {
         return artikelen.iterator();
     }
