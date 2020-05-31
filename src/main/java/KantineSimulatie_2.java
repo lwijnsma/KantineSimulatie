@@ -139,10 +139,11 @@ public class KantineSimulatie_2 {
             kantine.verwerkRijVoorKassa();
             // druk de dagtotalen af en hoeveel personen binnen
             // zijn gekomen
-            System.out.println(aantalpersonen);
-            System.out.println(kantine.getKassa().aantalArtikelen());
+            double dagOmzet = kantine.getKassa().hoeveelheidGeldInKassa();
+            System.out.println("Aantalpersonen = " + aantalpersonen);
+            System.out.println("Aantal artikelen = " +kantine.getKassa().aantalArtikelen());
             DecimalFormat df = new DecimalFormat("#######.00");
-            System.out.println(df.format(kantine.getKassa().hoeveelheidGeldInKassa()));
+            System.out.println("Hoeveelheid geld in kassa = " + df.format(dagOmzet));
             // reset de kassa voor de volgende dag
             kantine.getKassa().resetKassa();
 

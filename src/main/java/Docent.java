@@ -11,7 +11,15 @@ public class Docent extends Persoon{
         this.afdeling = afdeling;
     }
 
-    public String getAfkorting() {
+  @Override
+  public String toString() {
+    return "Docent{" +
+      "afkorting='" + afkorting + '\'' +
+      ", afdeling='" + afdeling + '\'' +
+      '}';
+  }
+
+  public String getAfkorting() {
         return afkorting;
     }
 

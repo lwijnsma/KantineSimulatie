@@ -5,13 +5,21 @@ public class Student extends Persoon{
 
     public Student(){} //lege constructor
 
-    public Student(long BSN, String voornaam, String achternaam, Datum geboortedatum, char geslacht, String studierichting, int studentnumer) {
+   public Student(long BSN, String voornaam, String achternaam, Datum geboortedatum, char geslacht, String studierichting, int studentnumer) {
         super(BSN, voornaam, achternaam, geboortedatum, geslacht);
         this.studierichting = studierichting;
         this.studentnumer = studentnumer;
     }
 
-    public String getStudierichting() {
+  @Override
+  public String toString() {
+    return "Student{" +
+      "studierichting='" + studierichting + '\'' +
+      ", studentnumer=" + studentnumer +
+      '}';
+  }
+
+  public String getStudierichting() {
         return studierichting;
     }
 

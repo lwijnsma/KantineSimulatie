@@ -1,5 +1,5 @@
 public class Persoon {
-    
+
     private long BSN;
     private String voornaam;
     private String achternaam;
@@ -8,6 +8,9 @@ public class Persoon {
 
     public Persoon() {} // Lege constructor
 
+  /*
+  *Consturctor van de klasse Persoon
+   */
     public Persoon(long BSN, String voornaam, String achternaam, Datum geboortedatum, char geslacht) {
         this.BSN = BSN;
         this.voornaam = voornaam;
@@ -17,10 +20,16 @@ public class Persoon {
     }
 
     public String toString() {
-        return BSN + " " + voornaam + " " + achternaam + " " + getGeboortedatum() + " " + getGeslacht();
-    }
+    return "Persoon{" +
+      "BSN=" + BSN +
+      ", voornaam='" + voornaam + '\'' +
+      ", achternaam='" + achternaam + '\'' +
+      ", geboortedatum=" + geboortedatum +
+      ", geslacht=" + geslacht +
+      '}';
+  }
 
-    public void setBSN(long BSN) {
+  public void setBSN(long BSN) {
         this.BSN = BSN;
     }
 

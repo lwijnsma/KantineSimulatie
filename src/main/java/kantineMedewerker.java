@@ -11,7 +11,15 @@ public class kantineMedewerker extends Persoon{
         this.achterKassa = achterKassa;
     }
 
-    public int getMedewerkerNR() {
+  @Override
+  public String toString() {
+    return "kantineMedewerker{" +
+      "medewerkerNR=" + medewerkerNR +
+      ", achterKassa=" + achterKassa +
+      '}';
+  }
+
+  public int getMedewerkerNR() {
         return medewerkerNR;
     }
 
