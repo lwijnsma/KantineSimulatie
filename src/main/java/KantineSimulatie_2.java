@@ -3,7 +3,9 @@ import java.util.*;
 
 public class KantineSimulatie_2 {
 
-    // kantine
+    private DecimalFormat df = new DecimalFormat("#######.00"); // deze code maakt een template aan waardoor getallen tot 2 achter de comma uitgeprint kunnen worden
+
+  // kantine
     private Kantine kantine;
 
     // kantineaanbod
@@ -11,6 +13,10 @@ public class KantineSimulatie_2 {
 
     // random generator
     private Random random;
+
+    private double[] omzet;
+
+    private int[] aantal;
 
     // aantal artikelen
     private static final int AANTAL_ARTIKELEN = 4;
@@ -105,6 +111,8 @@ public class KantineSimulatie_2 {
      * @param dagen
      */
     public void simuleer(int dagen) {
+        omzet = new double[dagen];
+        aantal = new int[dagen];
         // for lus voor dagen
         for(int i = 0; i < dagen; i++) {
 
@@ -137,17 +145,26 @@ public class KantineSimulatie_2 {
 
             // verwerk rij voor de kassa
             kantine.verwerkRijVoorKassa();
+            // hier worden variabelen aangemaakt om later te printen en in een array te zetten
+            double dagOmzet = kantine.getKassa().hoeveelheidGeldInKassa();
+            int dagVerkopen = kantine.getKassa().aantalArtikelen();
+            //hier worden de hierboven gemaakte variabelen in een array gezet
+            omzet[i] = dagOmzet;
+            aantal[i] = dagVerkopen;
             // druk de dagtotalen af en hoeveel personen binnen
             // zijn gekomen
-            double dagOmzet = kantine.getKassa().hoeveelheidGeldInKassa();
+          System.out.println("------ dag "+(i+1)+" ------");
             System.out.println("Aantalpersonen = " + aantalpersonen);
-            System.out.println("Aantal artikelen = " +kantine.getKassa().aantalArtikelen());
-            DecimalFormat df = new DecimalFormat("#######.00");
+            System.out.println("Aantal artikelen = " + dagVerkopen);
             System.out.println("Hoeveelheid geld in kassa = " + df.format(dagOmzet));
             // reset de kassa voor de volgende dag
             kantine.getKassa().resetKassa();
 
         }
+      Administratie administratie = new Administratie();
+        System.out.println("-------------------------------------------");
+      System.out.println("Gemiddelde omzet = " + df.format(administratie.berekenGemiddeldeOmzet(omzet)));
+      System.out.println("Gemiddeld aantal artikelen per dag = " + administratie.berekenGemiddeldAantal(aantal));
 
     }
     public static void main(String[] args) {
