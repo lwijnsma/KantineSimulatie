@@ -3,9 +3,7 @@ import java.util.*;
 
 public class KantineSimulatie_2 {
 
-    private DecimalFormat df = new DecimalFormat("#######.00"); // deze code maakt een template aan waardoor getallen tot 2 achter de comma uitgeprint kunnen worden
-
-  // kantine
+    // kantine
     private Kantine kantine;
 
     // kantineaanbod
@@ -23,6 +21,9 @@ public class KantineSimulatie_2 {
 
     // aantqal dagen
     private static final int DAGEN = 10;
+
+    // deze code maakt een template aan waardoor getallen tot 2 achter de comma uitgeprint kunnen worden
+    private DecimalFormat df = new DecimalFormat("#######.00");
 
     // artikelen
     private static final String[] artikelnamen =
@@ -153,7 +154,7 @@ public class KantineSimulatie_2 {
             aantal[i] = dagVerkopen;
             // druk de dagtotalen af en hoeveel personen binnen
             // zijn gekomen
-          System.out.println("------ dag "+(i+1)+" ------");
+            System.out.println("------ dag "+(i+1)+" ------");
             System.out.println("Aantalpersonen = " + aantalpersonen);
             System.out.println("Aantal artikelen = " + dagVerkopen);
             System.out.println("Hoeveelheid geld in kassa = " + df.format(dagOmzet));
@@ -161,22 +162,27 @@ public class KantineSimulatie_2 {
             kantine.getKassa().resetKassa();
 
         }
+
+        //print de gemiddelden over de gesimmuleerde periode
       Administratie administratie = new Administratie();
-        System.out.println("-------------------------------------------");
+      System.out.println("---------- Gemiddelden ----------");
       System.out.println("Gemiddelde omzet = " + df.format(administratie.berekenGemiddeldeOmzet(omzet)));
       System.out.println("Gemiddeld aantal artikelen per dag = " + administratie.berekenGemiddeldAantal(aantal));
 
+      //TODO werkt nog niet helemaal print random characters
+      //System.out.println("Dag omzet = " + administratie.berekenDagOmzet(omzet));
     }
+
     public static void main(String[] args) {
         int dagen;
         KantineSimulatie_2 kantineSimulatie = new KantineSimulatie_2();
-
         if (args.length == 0) {
             dagen = DAGEN;
         } else {
             dagen = Integer.parseInt(args[0]);
         }
         kantineSimulatie.simuleer(dagen);
+
     }
 }
 
