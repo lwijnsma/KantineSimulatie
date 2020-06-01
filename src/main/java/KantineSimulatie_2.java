@@ -127,17 +127,16 @@ public class KantineSimulatie_2 {
                 // en bedenk hoeveel artikelen worden gepakt
                 int aantalartikelen = 3 ;
 
-                int kans = getRandomValue(1, 100);
+                int kans = random.nextInt(100);
 
                 Persoon persoon;
 
-                if (kans >= 1 && kans <= 89) {
-                    persoon = new Student();
-                } if (kans >= 90 && kans <= 99) {
-                    persoon = new Docent();
-                } if (kans == 100) {
-                    persoon = new KantineMedewerker();
-                } else  persoon = new Persoon();
+                if (kans >= 1 && kans <= 89) { persoon = new Student(); }
+                else if (kans >= 90 && kans <= 99) { persoon = new Docent(); }
+                else if (kans == 100) { persoon = new KantineMedewerker(); }
+                else persoon = new Persoon();
+
+
 
                     Dienblad dienblad = new Dienblad(persoon);
 
