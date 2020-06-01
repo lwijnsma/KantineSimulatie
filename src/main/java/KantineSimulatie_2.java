@@ -118,7 +118,7 @@ public class KantineSimulatie_2 {
         for(int i = 0; i < dagen; i++) {
 
             // bedenk hoeveel personen vandaag binnen lopen
-            int aantalpersonen = 20 ;
+            int aantalpersonen = 100;
 
             // laat de personen maar komen...
             for (int j = 0; j < aantalpersonen; j++) {
@@ -126,22 +126,66 @@ public class KantineSimulatie_2 {
                 // maak persoon en dienblad aan, koppel ze
                 // en bedenk hoeveel artikelen worden gepakt
                 int aantalartikelen = 3 ;
-                Persoon persoon = new Persoon();
-                Dienblad dienblad = new Dienblad(persoon);
+                
+                int kans = getRandomValue(1, 100);
 
-                // genereer de "artikelnummers", dit zijn indexen
-                // van de artikelnamen
+                if (kans >= 1 && kans <= 89) {
+                    Persoon student = new Student();
+                    Dienblad dienblad = new Dienblad(student);
+
+                    System.out.println(student + " komt de kantine binnen");
+
+                    // genereer de "artikelnummers", dit zijn indexen
+                    // van de artikelnamen
                     int[] tepakken = getRandomArray(
                     aantalartikelen, 0, AANTAL_ARTIKELEN-1);
+    
+                    // vind de artikelnamen op basis van
+                    // de indexen hierboven
+                    String[] artikelen = geefArtikelNamen(tepakken);
+    
+                    // loop de kantine binnen, pak de gewenste
+                    // artikelen, sluit aan
+                    kantine.loopPakSluitAan(dienblad, artikelen);
 
-                // vind de artikelnamen op basis van
-                // de indexen hierboven
-                String[] artikelen = geefArtikelNamen(tepakken);
+                } else if (kans >= 90 && kans <= 99) {
+                    Persoon docent = new Docent();
+                    Dienblad dienblad = new Dienblad(docent);
 
-                // loop de kantine binnen, pak de gewenste
-                // artikelen, sluit aan
-                kantine.loopPakSluitAan(dienblad, artikelen);
+                    System.out.println(docent + " komt de kantine binnen");
 
+                    // genereer de "artikelnummers", dit zijn indexen
+                    // van de artikelnamen
+                    int[] tepakken = getRandomArray(
+                    aantalartikelen, 0, AANTAL_ARTIKELEN-1);
+    
+                    // vind de artikelnamen op basis van
+                    // de indexen hierboven
+                    String[] artikelen = geefArtikelNamen(tepakken);
+    
+                    // loop de kantine binnen, pak de gewenste
+                    // artikelen, sluit aan
+                    kantine.loopPakSluitAan(dienblad, artikelen);
+
+                } else {
+                    Persoon kantinemMedewerker = new KantineMedewerker();
+                    Dienblad dienblad = new Dienblad(kantinemMedewerker);
+
+                    System.out.println(kantinemMedewerker + " komt de kantine binnen");
+
+                    // genereer de "artikelnummers", dit zijn indexen
+                    // van de artikelnamen
+                    int[] tepakken = getRandomArray(
+                    aantalartikelen, 0, AANTAL_ARTIKELEN-1);
+    
+                    // vind de artikelnamen op basis van
+                    // de indexen hierboven
+                    String[] artikelen = geefArtikelNamen(tepakken);
+    
+                    // loop de kantine binnen, pak de gewenste
+                    // artikelen, sluit aan
+                    kantine.loopPakSluitAan(dienblad, artikelen);
+                }
             }
 
             // verwerk rij voor de kassa
@@ -170,7 +214,7 @@ public class KantineSimulatie_2 {
       System.out.println("Gemiddeld aantal artikelen per dag = " + administratie.berekenGemiddeldAantal(aantal));
 
       //TODO werkt nog niet helemaal print random characters
-      //System.out.println("Dag omzet = " + administratie.berekenDagOmzet(omzet));
+      //System.out.println("Dag omzet = " + Administratie.berekenDagOmzet(omzet));
     }
 
     public static void main(String[] args) {

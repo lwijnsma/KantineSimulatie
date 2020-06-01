@@ -1,11 +1,11 @@
-public class kantineMedewerker extends Persoon{
+public class KantineMedewerker extends Persoon{
 
     private int medewerkerNR;
     private boolean achterKassa; //geeft aan of de medewerker achter de kassa mag
 
-    public kantineMedewerker(){} //lege constructor
+    public KantineMedewerker(){} //lege constructor
 
-    public kantineMedewerker(long BSN, String voornaam, String achternaam, Datum geboortedatum, char geslacht, int medewerkerNR, boolean achterKassa) {
+    public KantineMedewerker(long BSN, String voornaam, String achternaam, Datum geboortedatum, char geslacht, int medewerkerNR, boolean achterKassa) {
         super(BSN, voornaam, achternaam, geboortedatum, geslacht);
         this.medewerkerNR = medewerkerNR;
         this.achterKassa = achterKassa;
