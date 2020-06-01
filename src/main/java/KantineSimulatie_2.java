@@ -1,4 +1,4 @@
-import javax.imageio.plugins.jpeg.JPEGImageReadParam;
+import java.text.DecimalFormat;
 import java.util.*;
 
 public class KantineSimulatie_2 {
@@ -12,11 +12,20 @@ public class KantineSimulatie_2 {
     // random generator
     private Random random;
 
+    // omzet array
+    private double[] omzet;
+
+    //aantal artikelen array
+    private int[] aantal;
+
     // aantal artikelen
     private static final int AANTAL_ARTIKELEN = 4;
 
     // aantqal dagen
     private static final int DAGEN = 10;
+
+    // deze code maakt een template aan waardoor getallen tot 2 achter de comma uitgeprint kunnen worden
+    private DecimalFormat df = new DecimalFormat("#######.00");
 
     // artikelen
     private static final String[] artikelnamen =
@@ -26,8 +35,8 @@ public class KantineSimulatie_2 {
     private static double[] artikelprijzen = new double[] {1.50, 2.10, 1.65, 1.65};
 
     // minimum en maximum aantal artikelen per soort
-    private static final int MIN_ARTIKELEN_PER_SOORT = 10000;
-    private static final int MAX_ARTIKELEN_PER_SOORT = 20000;
+    private static final int MIN_ARTIKELEN_PER_SOORT = 10;
+    private static final int MAX_ARTIKELEN_PER_SOORT = 20;
 
     // minimum en maximum aantal personen per dag
     private static final int MIN_PERSONEN_PER_DAG = 50;
@@ -105,59 +114,117 @@ public class KantineSimulatie_2 {
      * @param dagen
      */
     public void simuleer(int dagen) {
+        omzet = new double[dagen];
+        aantal = new int[dagen];
         // for lus voor dagen
         for(int i = 0; i < dagen; i++) {
-
+            System.out.println("------ dag "+(i+1)+" ------");
             // bedenk hoeveel personen vandaag binnen lopen
-            int aantalpersonen = 20 ;
+            int aantalpersonen = getRandomValue(MIN_PERSONEN_PER_DAG, MAX_PERSONEN_PER_DAG);
 
             // laat de personen maar komen...
             for (int j = 0; j < aantalpersonen; j++) {
 
                 // maak persoon en dienblad aan, koppel ze
                 // en bedenk hoeveel artikelen worden gepakt
-                int aantalartikelen = 3 ;
-                Persoon persoon = new Persoon();
-                Dienblad dienblad = new Dienblad(persoon);
+              int aantalartikelen = getRandomValue(MIN_ARTIKELEN_PER_PERSOON, MAX_ARTIKELEN_PER_PERSOON);
 
-                // genereer de "artikelnummers", dit zijn indexen
-                // van de artikelnamen
+                //random int generator
+                int kans = random.nextInt(100);
+
+                Persoon persoon;
+                /*
+                *bereken de kans die elk type persoon heeft om binnen te lopen
+                *
+                * Student 89 op 100
+                * Docent 10 op 100
+                * Medewerker 1 op 100
+                 */
+                if (kans >= 1 && kans <= 89) { persoon = new Student(); }
+                else if (kans >= 90 && kans <= 99) { persoon = new Docent(); }
+                else if (kans == 100) { persoon = new KantineMedewerker(); }
+                else persoon = new Persoon();
+
+                    //koppel dienblad aan persoon
+                    Dienblad dienblad = new Dienblad(persoon);
+
+                    System.out.println(persoon + " komt de kantine binnen");
+
+                    // genereer de "artikelnummers", dit zijn indexen
+                    // van de artikelnamen
                     int[] tepakken = getRandomArray(
                     aantalartikelen, 0, AANTAL_ARTIKELEN-1);
 
-                // vind de artikelnamen op basis van
-                // de indexen hierboven
-                String[] artikelen = geefArtikelNamen(tepakken);
+                    // vind de artikelnamen op basis van
+                    // de indexen hierboven
+                    String[] artikelen = geefArtikelNamen(tepakken);
 
-                // loop de kantine binnen, pak de gewenste
-                // artikelen, sluit aan
-                kantine.loopPakSluitAan(dienblad, artikelen);
+                    // loop de kantine binnen, pak de gewenste
+                    // artikelen, sluit aan
+                    kantine.loopPakSluitAan(dienblad, artikelen);
 
             }
 
             // verwerk rij voor de kassa
             kantine.verwerkRijVoorKassa();
+            // hier worden variabelen aangemaakt om later te printen en in een array te zetten
+            double dagOmzet = kantine.getKassa().hoeveelheidGeldInKassa();
+            int dagVerkopen = kantine.getKassa().aantalArtikelen();
+            //hier worden de hierboven gemaakte variabelen in een array gezet
+            omzet[i] = dagOmzet;
+            aantal[i] = dagVerkopen;
             // druk de dagtotalen af en hoeveel personen binnen
             // zijn gekomen
-            System.out.println(aantalpersonen);
-            System.out.println(kantine.getKassa().aantalArtikelen());
-            System.out.println(kantine.getKassa().hoeveelheidGeldInKassa());
+            System.out.println("------ Dag totalen ------");
+            System.out.println("Aantalpersonen = " + aantalpersonen);
+            System.out.println("Aantal artikelen = " + dagVerkopen);
+            System.out.println("Hoeveelheid geld in kassa = " + df.format(dagOmzet));
             // reset de kassa voor de volgende dag
             kantine.getKassa().resetKassa();
 
         }
 
+        //print de gemiddelden over de gesimmuleerde periode
+      Administratie administratie = new Administratie();
+      System.out.println("---------- Gemiddelden ----------");
+      System.out.println("Gemiddelde omzet = " + df.format(administratie.berekenGemiddeldeOmzet(omzet)));
+      System.out.println("Gemiddeld aantal artikelen per dag = " + administratie.berekenGemiddeldAantal(aantal));
+      System.out.println("Omzet totalen per dag:");
+      for(int i=0; i< administratie.berekenDagOmzet(omzet).length; i++){
+        String dag;
+        // geef een naam aan elke dag
+        switch(i){
+          case 0:dag = "Maandag ";break;
+          case 1:dag = "Dinsdag ";break;
+          case 2:dag = "Woendsdag ";break;
+          case 3:dag = "Donderdag ";break;
+          case 4:dag = "Vrijdag ";break;
+          case 5:dag = "Zaterdag ";break;
+          case 6:dag = "Zondag ";break;
+          default:dag = "";break;
+        }
+        //print dagnaam + dagtotaal
+        System.out.println(dag + df.format(administratie.berekenDagOmzet(omzet)[i]));
+      };
     }
+
+
     public static void main(String[] args) {
+        // aantal dagen dat de simulatie runt
         int dagen;
-        KantineSimulatie_1 kantineSimulatie = new KantineSimulatie_1();
+        //maak nieuwe instance van de simulator
+
+        KantineSimulatie_2 kantineSimulatie = new KantineSimulatie_2();
+        //kijken of er een cli argument gegeven word
 
         if (args.length == 0) {
             dagen = DAGEN;
         } else {
             dagen = Integer.parseInt(args[0]);
         }
+        //start simulatie
         kantineSimulatie.simuleer(dagen);
+
     }
 }
 
