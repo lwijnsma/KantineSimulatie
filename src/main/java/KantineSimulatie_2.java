@@ -116,7 +116,7 @@ public class KantineSimulatie_2 {
         aantal = new int[dagen];
         // for lus voor dagen
         for(int i = 0; i < dagen; i++) {
-
+            System.out.println("------ dag "+(i+1)+" ------");
             // bedenk hoeveel personen vandaag binnen lopen
             int aantalpersonen = 100;
 
@@ -126,7 +126,7 @@ public class KantineSimulatie_2 {
                 // maak persoon en dienblad aan, koppel ze
                 // en bedenk hoeveel artikelen worden gepakt
                 int aantalartikelen = 3 ;
-                
+
                 int kans = getRandomValue(1, 100);
 
                 Persoon persoon;
@@ -138,7 +138,7 @@ public class KantineSimulatie_2 {
                 } if (kans == 100) {
                     persoon = new KantineMedewerker();
                 } else  persoon = new Persoon();
-                
+
                     Dienblad dienblad = new Dienblad(persoon);
 
                     System.out.println(persoon + " komt de kantine binnen");
@@ -147,15 +147,15 @@ public class KantineSimulatie_2 {
                     // van de artikelnamen
                     int[] tepakken = getRandomArray(
                     aantalartikelen, 0, AANTAL_ARTIKELEN-1);
-    
+
                     // vind de artikelnamen op basis van
                     // de indexen hierboven
                     String[] artikelen = geefArtikelNamen(tepakken);
-    
+
                     // loop de kantine binnen, pak de gewenste
                     // artikelen, sluit aan
                     kantine.loopPakSluitAan(dienblad, artikelen);
-                
+
             }
 
             // verwerk rij voor de kassa
@@ -168,7 +168,7 @@ public class KantineSimulatie_2 {
             aantal[i] = dagVerkopen;
             // druk de dagtotalen af en hoeveel personen binnen
             // zijn gekomen
-            System.out.println("------ dag "+(i+1)+" ------");
+            System.out.println("------ Dag totalen ------");
             System.out.println("Aantalpersonen = " + aantalpersonen);
             System.out.println("Aantal artikelen = " + dagVerkopen);
             System.out.println("Hoeveelheid geld in kassa = " + df.format(dagOmzet));
