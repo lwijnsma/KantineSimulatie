@@ -9,8 +9,8 @@ public class Administratie {
      * @return het gemiddelde
      */
     public double berekenGemiddeldAantal(int[] aantal) {
-        int aantalGetallen = aantal.length;
-        int totaal = 0;
+        double aantalGetallen = aantal.length;
+        double totaal = 0;
         for(int getal : aantal){
             totaal = totaal + getal;
         }
@@ -48,13 +48,14 @@ public class Administratie {
      */
 
     public static double[] berekenDagOmzet(double[] omzet) {
-        double[] temp = new double[7];
+        double[] temp = new double[DAYS_IN_WEEK];
         for(int i = 0; i < DAYS_IN_WEEK; i++) {
             int j = 0;
-            while (j % 7 == 0) {
+            while (omzet.length >i + j*DAYS_IN_WEEK) {
                 temp[i] += omzet[i + DAYS_IN_WEEK * j];
                 j++;
             }
+
         }
         return temp;
     }
