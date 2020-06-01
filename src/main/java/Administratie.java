@@ -9,13 +9,17 @@ public class Administratie {
      * @return het gemiddelde
      */
     public double berekenGemiddeldAantal(int[] aantal) {
+        //cast ints naar double
         double aantalGetallen = aantal.length;
         double totaal = 0;
+        //tel alle aantallen in de array bijelkaar op
         for(int getal : aantal){
             totaal = totaal + getal;
         }
         if (totaal != 0 && aantalGetallen != 0) {
-            return totaal / aantalGetallen;
+          //bereken gemiddelde
+
+          return totaal / aantalGetallen;
         }
         else
             return 0;
@@ -33,7 +37,9 @@ public class Administratie {
         for(double prijs : omzet){
             totaal += prijs;
         }
+      //tel alle prijzen in de array bijelkaar op
         if (totaal != 0 && aantalGetallen != 0) {
+            //bereken gemiddelde
             return totaal / aantalGetallen;
         }
         else
@@ -52,7 +58,9 @@ public class Administratie {
         for(int i = 0; i < DAYS_IN_WEEK; i++) {
             int j = 0;
             while (omzet.length >i + j*DAYS_IN_WEEK) {
+                //voeg omzet toe
                 temp[i] += omzet[i + DAYS_IN_WEEK * j];
+                //naar nieuwe week
                 j++;
             }
 

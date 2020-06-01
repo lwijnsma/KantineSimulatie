@@ -11,9 +11,11 @@ public class KantineSimulatie_2 {
 
     // random generator
     private Random random;
-
+    
+    // omzet array
     private double[] omzet;
 
+    //aantal artikelen array
     private int[] aantal;
 
     // aantal artikelen
@@ -127,17 +129,23 @@ public class KantineSimulatie_2 {
                 // en bedenk hoeveel artikelen worden gepakt
                 int aantalartikelen = 3 ;
 
+                //random int generator
                 int kans = random.nextInt(100);
 
                 Persoon persoon;
-
+                /*
+                *bereken de kans die elk type persoon heeft om binnen te lopen
+                *
+                * Student 89 op 100
+                * Docent 10 op 100
+                * Medewerker 1 op 100
+                 */
                 if (kans >= 1 && kans <= 89) { persoon = new Student(); }
                 else if (kans >= 90 && kans <= 99) { persoon = new Docent(); }
                 else if (kans == 100) { persoon = new KantineMedewerker(); }
                 else persoon = new Persoon();
 
-
-
+                    //koppel dienblad aan persoon
                     Dienblad dienblad = new Dienblad(persoon);
 
                     System.out.println(persoon + " komt de kantine binnen");
@@ -184,6 +192,7 @@ public class KantineSimulatie_2 {
       System.out.println("Omzet totalen per dag:");
       for(int i=0; i< administratie.berekenDagOmzet(omzet).length; i++){
         String dag;
+        // geef een naam aan elke dag
         switch(i){
           case 0:dag = "Maandag ";break;
           case 1:dag = "Dinsdag ";break;
@@ -194,18 +203,26 @@ public class KantineSimulatie_2 {
           case 6:dag = "Zondag ";break;
           default:dag = "";break;
         }
+        //print dagnaam + dagtotaal
         System.out.println(dag + df.format(administratie.berekenDagOmzet(omzet)[i]));
       };
     }
 
+
     public static void main(String[] args) {
+        // aantal dagen dat de simulatie runt
         int dagen;
+        //maak nieuwe instance van de simulator
+
         KantineSimulatie_2 kantineSimulatie = new KantineSimulatie_2();
+        //kijken of er een cli argument gegeven word
+
         if (args.length == 0) {
             dagen = DAGEN;
         } else {
             dagen = Integer.parseInt(args[0]);
         }
+        //start simulatie
         kantineSimulatie.simuleer(dagen);
 
     }
