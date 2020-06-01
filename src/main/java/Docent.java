@@ -15,17 +15,17 @@ public class Docent extends Persoon implements KortingskaartHouder{
 
   @Override
   public double geefKortingsPercentage() {
-    return 0;
+    return 0.25;
   }
 
   @Override
   public boolean heeftMaximum() {
-    return false;
+    return true;
   }
 
   @Override
   public double geefMaximum() {
-    return 0;
+    return 1;
   }
 
   @Override

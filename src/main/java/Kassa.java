@@ -6,7 +6,7 @@ public class Kassa {
     private double geldTotaal;
     private KassaRij kassaRij;
 
-    /**
+  /**
      * Constructor
      */
     public Kassa(KassaRij kassaRij) {
@@ -18,17 +18,29 @@ public class Kassa {
      * die voor de kassa worden bijgehouden. De implementatie wordt later vervangen door een echte
      * betaling door de persoon.
      *
-     * @param klant die moet afrekenen
+     * @param dienblad van klant die moet afrekenen
      */
-    public void rekenAf(Dienblad klant) {
-        Iterator<Artikel> dienblad = klant.getDienblad();
-        Betaalwijze betaalwijze = klant.getKlant().getBetaalwijze();
+    public void rekenAf(Dienblad dienblad) {
+        Iterator<Artikel> artikelen = dienblad.getDienblad();
+        Betaalwijze betaalwijze = dienblad.getKlant().getBetaalwijze();
+        Persoon klant = dienblad.getKlant();
         double tebetalen =0;
-        while (dienblad.hasNext()) {
+        while (artikelen.hasNext()) {
         aantalTotaal++;
-        tebetalen += dienblad.next().getPrijs();
+        tebetalen += artikelen.next().getPrijs();
         }
-        if(betaalwijze.betaal(tebetalen)){
+        if(klant instanceof KortingskaartHouder){
+          if(((KortingskaartHouder) klant).heeftMaximum()){
+            double maximum = ((KortingskaartHouder) klant).geefMaximum();
+            double korting = tebetalen * ((KortingskaartHouder) klant).geefKortingsPercentage();
+            if(korting>maximum){
+              tebetalen = tebetalen - ((KortingskaartHouder) klant).geefMaximum();
+            }else tebetalen = tebetalen * ((KortingskaartHouder) klant).geefKortingsPercentage();
+          }
+          else tebetalen = tebetalen * ((KortingskaartHouder) klant).geefKortingsPercentage();
+        }
+
+      if(betaalwijze.betaal(tebetalen)){
           geldTotaal += tebetalen;
         }else System.out.println("Betaling mislukt");
 
