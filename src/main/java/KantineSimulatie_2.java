@@ -11,7 +11,7 @@ public class KantineSimulatie_2 {
 
     // random generator
     private Random random;
-    
+
     // omzet array
     private double[] omzet;
 
@@ -35,8 +35,8 @@ public class KantineSimulatie_2 {
     private static double[] artikelprijzen = new double[] {1.50, 2.10, 1.65, 1.65};
 
     // minimum en maximum aantal artikelen per soort
-    private static final int MIN_ARTIKELEN_PER_SOORT = 10000;
-    private static final int MAX_ARTIKELEN_PER_SOORT = 20000;
+    private static final int MIN_ARTIKELEN_PER_SOORT = 10;
+    private static final int MAX_ARTIKELEN_PER_SOORT = 20;
 
     // minimum en maximum aantal personen per dag
     private static final int MIN_PERSONEN_PER_DAG = 50;
@@ -120,14 +120,14 @@ public class KantineSimulatie_2 {
         for(int i = 0; i < dagen; i++) {
             System.out.println("------ dag "+(i+1)+" ------");
             // bedenk hoeveel personen vandaag binnen lopen
-            int aantalpersonen = 100;
+            int aantalpersonen = getRandomValue(MIN_PERSONEN_PER_DAG, MAX_PERSONEN_PER_DAG);
 
             // laat de personen maar komen...
             for (int j = 0; j < aantalpersonen; j++) {
 
                 // maak persoon en dienblad aan, koppel ze
                 // en bedenk hoeveel artikelen worden gepakt
-                int aantalartikelen = 3 ;
+              int aantalartikelen = getRandomValue(MIN_ARTIKELEN_PER_PERSOON, MAX_ARTIKELEN_PER_PERSOON);
 
                 //random int generator
                 int kans = random.nextInt(100);
