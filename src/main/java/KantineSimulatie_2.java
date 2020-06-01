@@ -183,7 +183,10 @@ public class KantineSimulatie_2 {
       System.out.println("Gemiddeld aantal artikelen per dag = " + administratie.berekenGemiddeldAantal(aantal));
 
       //TODO werkt nog niet helemaal print random characters
-      //System.out.println("Dag omzet = " + Administratie.berekenDagOmzet(omzet));
+      for(Double omzet : administratie.berekenDagOmzet(omzet)){
+
+        System.out.println(df.format(omzet));
+      };
     }
 
     public static void main(String[] args) {

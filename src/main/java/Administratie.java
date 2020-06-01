@@ -51,7 +51,7 @@ public class Administratie {
         double[] temp = new double[7];
         for(int i = 0; i < DAYS_IN_WEEK; i++) {
             int j = 0;
-            while (i == j) {
+            while (j % 7 == 0) {
                 temp[i] += omzet[i + DAYS_IN_WEEK * j];
                 j++;
             }
