@@ -22,11 +22,16 @@ public class Kassa {
      */
     public void rekenAf(Dienblad klant) {
         Iterator<Artikel> dienblad = klant.getDienblad();
+        Betaalwijze betaalwijze = klant.getKlant().getBetaalwijze();
+        double tebetalen =0;
         while (dienblad.hasNext()) {
         aantalTotaal++;
-        geldTotaal += dienblad.next().getPrijs();
+        tebetalen += dienblad.next().getPrijs();
         }
-        
+        if(betaalwijze.betaal(tebetalen)){
+          geldTotaal += tebetalen;
+        }else System.out.println("Betaling mislukt");
+
     }
 
     /**
