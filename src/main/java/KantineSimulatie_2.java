@@ -129,30 +129,19 @@ public class KantineSimulatie_2 {
                 
                 int kans = getRandomValue(1, 100);
 
+                Persoon persoon;
+
                 if (kans >= 1 && kans <= 89) {
-                    Persoon student = new Student();
-                    Dienblad dienblad = new Dienblad(student);
+                    persoon = new Student();
+                } if (kans >= 90 && kans <= 99) {
+                    persoon = new Docent();
+                } if (kans == 100) {
+                    persoon = new KantineMedewerker();
+                } else  persoon = new Persoon();
+                
+                    Dienblad dienblad = new Dienblad(persoon);
 
-                    System.out.println(student + " komt de kantine binnen");
-
-                    // genereer de "artikelnummers", dit zijn indexen
-                    // van de artikelnamen
-                    int[] tepakken = getRandomArray(
-                    aantalartikelen, 0, AANTAL_ARTIKELEN-1);
-    
-                    // vind de artikelnamen op basis van
-                    // de indexen hierboven
-                    String[] artikelen = geefArtikelNamen(tepakken);
-    
-                    // loop de kantine binnen, pak de gewenste
-                    // artikelen, sluit aan
-                    kantine.loopPakSluitAan(dienblad, artikelen);
-
-                } else if (kans >= 90 && kans <= 99) {
-                    Persoon docent = new Docent();
-                    Dienblad dienblad = new Dienblad(docent);
-
-                    System.out.println(docent + " komt de kantine binnen");
+                    System.out.println(persoon + " komt de kantine binnen");
 
                     // genereer de "artikelnummers", dit zijn indexen
                     // van de artikelnamen
@@ -166,26 +155,7 @@ public class KantineSimulatie_2 {
                     // loop de kantine binnen, pak de gewenste
                     // artikelen, sluit aan
                     kantine.loopPakSluitAan(dienblad, artikelen);
-
-                } else {
-                    Persoon kantinemMedewerker = new KantineMedewerker();
-                    Dienblad dienblad = new Dienblad(kantinemMedewerker);
-
-                    System.out.println(kantinemMedewerker + " komt de kantine binnen");
-
-                    // genereer de "artikelnummers", dit zijn indexen
-                    // van de artikelnamen
-                    int[] tepakken = getRandomArray(
-                    aantalartikelen, 0, AANTAL_ARTIKELEN-1);
-    
-                    // vind de artikelnamen op basis van
-                    // de indexen hierboven
-                    String[] artikelen = geefArtikelNamen(tepakken);
-    
-                    // loop de kantine binnen, pak de gewenste
-                    // artikelen, sluit aan
-                    kantine.loopPakSluitAan(dienblad, artikelen);
-                }
+                
             }
 
             // verwerk rij voor de kassa
