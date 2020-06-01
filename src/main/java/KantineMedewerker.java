@@ -1,15 +1,17 @@
 public class KantineMedewerker extends Persoon{
 
+    //speciale KantineMedewerker eigenschappen
     private int medewerkerNR;
     private boolean achterKassa; //geeft aan of de medewerker achter de kassa mag
 
     public KantineMedewerker(){} //lege constructor
 
+    // consturctor voor KantineMedewerke die alle dingen van persoon plus die van KantineMedewerker initieert
     public KantineMedewerker(long BSN, String voornaam, String achternaam, Datum geboortedatum, char geslacht, int medewerkerNR, boolean achterKassa) {
-        super(BSN, voornaam, achternaam, geboortedatum, geslacht);
-        this.medewerkerNR = medewerkerNR;
-        this.achterKassa = achterKassa;
-    }
+          super(BSN, voornaam, achternaam, geboortedatum, geslacht);
+          this.medewerkerNR = medewerkerNR;
+          this.achterKassa = achterKassa;
+      }
 
   @Override
   public String toString() {

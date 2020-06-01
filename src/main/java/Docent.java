@@ -1,10 +1,12 @@
 public class Docent extends Persoon{
 
+    //speciale Docent eigenschappen
     private String afkorting;
     private String afdeling;
 
     public Docent(){} //lege constructor
 
+    // consturctor voor Docent die alle dingen van persoon plus die van Docent initieert
     public Docent(long BSN, String voornaam, String achternaam, Datum geboortedatum, char geslacht, String afkorting, String afdeling) {
         super(BSN, voornaam, achternaam, geboortedatum, geslacht);
         this.afkorting = afkorting;

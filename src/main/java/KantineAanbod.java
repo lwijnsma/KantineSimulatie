@@ -26,16 +26,21 @@ public class KantineAanbod {
         }
     }
 
+    /**
+     * Methode die de vooraad van een bepaald product aanvult
+     *
+     * @param productnaam hetproduct wat bijgevuld moet worden
+     */
     private void vulVoorraadAan(String productnaam) {
-        ArrayList<Artikel> huidigeVoorraad = aanbod.get(productnaam);
-        int startHoeveelheid = startVoorraad.get(productnaam);
-        int huidigeHoeveelheid = huidigeVoorraad.size();
-        double prijs = prijzen.get(productnaam);
-        for (int j = huidigeHoeveelheid; j < startHoeveelheid; j++) {
-            huidigeVoorraad.add(new Artikel(productnaam, prijs));
-        }
-        aanbod.put(productnaam, huidigeVoorraad);
-    }
+          ArrayList<Artikel> huidigeVoorraad = aanbod.get(productnaam);
+          int startHoeveelheid = startVoorraad.get(productnaam);
+          int huidigeHoeveelheid = huidigeVoorraad.size();
+          double prijs = prijzen.get(productnaam);
+          for (int j = huidigeHoeveelheid; j < startHoeveelheid; j++) {
+              huidigeVoorraad.add(new Artikel(productnaam, prijs));
+          }
+          aanbod.put(productnaam, huidigeVoorraad);
+      }
 
     /*
      * Private methode om de lijst van artikelen te krijgen op basis van de naam van het artikel.
@@ -47,7 +52,7 @@ public class KantineAanbod {
 
     /**
      * Private methode om een Artikel van de stapel artikelen af te pakken. Retourneert null als de
-     * stapel leeg is.
+     * stapel leeg is en vult de voorraad aan als die op is.
      */
     private Artikel getArtikelFromlist(ArrayList<Artikel> stapel) {
         if (stapel == null) {
