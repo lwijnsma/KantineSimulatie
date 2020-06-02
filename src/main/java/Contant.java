@@ -5,6 +5,6 @@ public class Contant extends Betaalwijze {
     public void betaal(double tebetalen) throws TeWeinigGeldException {
       if (saldo > tebetalen) {
         setSaldo(saldo - tebetalen);
-      } else throw new TeWeinigGeldException("geen saldo");
+      } else throw new TeWeinigGeldException("saldo is telaag");
     }
 }

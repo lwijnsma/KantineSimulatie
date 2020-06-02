@@ -19,7 +19,7 @@ public class Dienblad {
     /**
      * Methode om artikel aan dienblad toe te voegen
      *
-     * @param artikel
+     * @param artikel het artikel dat op het dienblad gelegd moet worden
      */
     public void voegToe(Artikel artikel) {
         artikelen.push(artikel);
