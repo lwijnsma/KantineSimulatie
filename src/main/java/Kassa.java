@@ -39,10 +39,13 @@ public class Kassa {
           }
           else tebetalen = tebetalen * ((KortingskaartHouder) klant).geefKortingsPercentage();
         }
-
-      if(betaalwijze.betaal(tebetalen)){
-          geldTotaal += tebetalen;
-        }else System.out.println("Betaling mislukt");
+        try{
+            betaalwijze.betaal(tebetalen);
+            geldTotaal += tebetalen;
+        }
+        catch (TeWeinigGeldException message){
+            System.out.println(message+""+klant.getVoornaam());
+        }
 
     }
 
