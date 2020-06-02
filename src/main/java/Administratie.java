@@ -5,10 +5,10 @@ public class Administratie {
     /**
      * Deze methode berekent van de int array aantal de gemiddelde waarde
      *
-     * @param aantal
+     * @param aantal aantal artikelen per dag in een array
      * @return het gemiddelde
      */
-    public double berekenGemiddeldAantal(int[] aantal) {
+    public static double berekenGemiddeldAantal(int[] aantal) {
         //cast ints naar double
         double aantalGetallen = aantal.length;
         double totaal = 0;
@@ -28,10 +28,10 @@ public class Administratie {
     /**
      * Deze methode berekent van de double array omzet de gemiddelde waarde
      *
-     * @param omzet
+     * @param omzet de omzet per dag in een array
      * @return het gemiddelde
      */
-    public double berekenGemiddeldeOmzet(double[] omzet) {
+    public static double berekenGemiddeldeOmzet(double[] omzet) {
         int aantalGetallen = omzet.length;
         double totaal = 0;
         for(double prijs : omzet){
@@ -49,7 +49,7 @@ public class Administratie {
     /**
      * Methode om dagomzet uit te rekenen
      *
-     * @param omzet
+     * @param omzet de omzet per dag in een array
      * @return array (7 elementen) met dagomzetten
      */
 

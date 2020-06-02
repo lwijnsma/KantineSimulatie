@@ -5,7 +5,7 @@ public class Pinpas extends Betaalwijze {
     /**
      * Methode om kredietlimiet te zetten
      *
-     * @param kredietlimiet
+     * @param kredietlimiet het krediet limiet van de pas
      */
     public void setKredietLimiet(double kredietlimiet) {
         this.kredietlimiet=kredietlimiet;
@@ -18,7 +18,7 @@ public class Pinpas extends Betaalwijze {
       if(saldo > tebetalen){
        if(tebetalen <= kredietlimiet){
           setSaldo(saldo-tebetalen);
-        } else throw new TeWeinigGeldException("betaling past niet in kredietlimiet");
+        } else throw new TeWeinigGeldException("betaling past niet binnen kredietlimiet");
       } else throw new TeWeinigGeldException("saldo is telaag");
     }
 }
