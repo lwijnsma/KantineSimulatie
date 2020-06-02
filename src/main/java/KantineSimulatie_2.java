@@ -144,6 +144,14 @@ public class KantineSimulatie_2 {
                 else if (kans >= 90 && kans <= 99) { persoon = new Docent(); }
                 else if (kans == 100) { persoon = new KantineMedewerker(); }
                 else persoon = new Persoon();
+                Betaalwijze contant = new Contant();
+
+                //TODO tijdelijk !!
+                //set betaalwijze voor persoon
+                persoon.setBetaalwijze(contant);
+                persoon.getBetaalwijze().setSaldo(5);
+                persoon.setVoornaam("voornaam");
+                //TODO tijdelijk !!
 
                     //koppel dienblad aan persoon
                     Dienblad dienblad = new Dienblad(persoon);

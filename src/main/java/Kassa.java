@@ -20,7 +20,7 @@ public class Kassa {
      *
      * @param dienblad van klant die moet afrekenen
      */
-    public void rekenAf(Dienblad dienblad) {
+    public void rekenAf(Dienblad dienblad){
         Iterator<Artikel> artikelen = dienblad.getDienblad();
         Betaalwijze betaalwijze = dienblad.getKlant().getBetaalwijze();
         Persoon klant = dienblad.getKlant();
@@ -44,7 +44,7 @@ public class Kassa {
             geldTotaal += tebetalen;
         }
         catch (TeWeinigGeldException message){
-            System.out.println(message+""+klant.getVoornaam());
+            System.out.println(klant.getVoornaam()+" "+message);
         }
 
     }
