@@ -24,10 +24,10 @@ h.	Leg het begrip polymorfisme van klassen uit en geef twee voorbeelden (één m
 
 
 Opgave 4: Een paar doordenkers
-a.	Kan een klasse abstract zijn als geen enkele methode abstract is in die klasse? Probeer het eensuit. Leg waarom het logisch is dat dit wel of niet kan.
+a.	Kan een klasse abstract zijn als geen enkele methode abstract is in die klasse? Probeer het eens uit. Leg waarom het logisch is dat dit wel of niet kan.
 
 
-b.	Moeteensubklassevaneenabstracteklassealtijdalleabstractemethodesimplementeren?Leguit waarom het logisch is dat dit wel of niet kan.
+b.	Moet een subklasse van een abstracte klasse altijd alle abstracte methodes implementeren? Leguit waarom het logisch is dat dit wel of niet kan.
 
 
 c.	Als een klasse niet alle methoden van een interface implementeert kun je iets doen om een(compiler)fout te voorkomen. Wat? Waarom is de oplossing logisch?
@@ -36,6 +36,5 @@ c.	Als een klasse niet alle methoden van een interface implementeert kun je iets
 d.	Leg uit waarom het logisch is dat een instantie variabele niet abstract kan zijn.
 
 
-e.	(Uitdaging) Zoek uit wat eenfinalmethode is. Leg daarna uit waarom het logisch is dat eenmethode niet tegelijkertijd abstract en final kan zijn.
+e.	(Uitdaging) Zoek uit wat een final methode is. Leg daarna uit waarom het logisch is dat een methode niet tegelijkertijd abstract en final kan zijn.
 
-    
