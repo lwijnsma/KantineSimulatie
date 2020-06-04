@@ -130,7 +130,7 @@ public class KantineSimulatie_2 {
               int aantalartikelen = getRandomValue(MIN_ARTIKELEN_PER_PERSOON, MAX_ARTIKELEN_PER_PERSOON);
 
                 //random int generator
-                int kans = random.nextInt(100);
+                int Persoonkans = random.nextInt(100);
 
                 Persoon persoon;
                 /*
@@ -140,17 +140,26 @@ public class KantineSimulatie_2 {
                 * Docent 10 op 100
                 * Medewerker 1 op 100
                  */
-                if (kans >= 0 && kans <= 89) { persoon = new Student(1, null, null, null,'M', "HBO-ICT", getRandomValue(100000,999999)); }
-                else if (kans >= 90 && kans < 99) { persoon = new Docent(1, null, null, null,'M', "DOC","SCMI");
+                if (Persoonkans >= 0 && Persoonkans <= 89) { persoon = new Student(1, null, null, null,'M', "HBO-ICT", getRandomValue(100000,999999)); }
+                else if (Persoonkans >= 90 && Persoonkans < 99) { persoon = new Docent(1, null, null, null,'M', "DOC","SCMI");
                 }
-                else if (kans == 99) { persoon = new KantineMedewerker(1, null, null, null,'M', getRandomValue(100000,999999),false); }
+                else if (Persoonkans == 99) { persoon = new KantineMedewerker(1, null, null, null,'M', getRandomValue(100000,999999),false); }
                 else persoon = new Persoon();
-                Betaalwijze betaalwijze = new Contant();
+
+                //maak random betaalwijze per persoon
+                int BetaalKans = random.nextInt(2);
+                Betaalwijze betaalwijze;
+                if(BetaalKans == 0){
+                    betaalwijze = new Pinpas();
+                    ((Pinpas) betaalwijze).setKredietLimiet(150);
+                }
+                else betaalwijze = new Contant();
+
 
                 //TODO tijdelijk !!
                 //set betaalwijze voor persoon
                 persoon.setBetaalwijze(betaalwijze);
-                persoon.getBetaalwijze().setSaldo(5);
+                persoon.getBetaalwijze().setSaldo(10);
                 persoon.setVoornaam("John");
                 persoon.setAchternaam("Doe");
                 persoon.setGeslacht('M');
