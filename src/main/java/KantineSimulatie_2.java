@@ -140,9 +140,10 @@ public class KantineSimulatie_2 {
                 * Docent 10 op 100
                 * Medewerker 1 op 100
                  */
-                if (kans >= 1 && kans <= 89) { persoon = new Student(); }
-                else if (kans >= 90 && kans <= 99) { persoon = new Docent(); }
-                else if (kans == 100) { persoon = new KantineMedewerker(); }
+                if (kans >= 0 && kans <= 89) { persoon = new Student(1, null, null, null,'M', "HBO-ICT", getRandomValue(100000,999999)); }
+                else if (kans >= 90 && kans <= 99) { persoon = new Docent(1, null, null, null,'M', "DOC","SCMI");
+                }
+                else if (kans == 100) { persoon = new KantineMedewerker(1, null, null, null,'M', getRandomValue(100000,999999),false); }
                 else persoon = new Persoon();
                 Betaalwijze contant = new Contant();
 
@@ -150,7 +151,11 @@ public class KantineSimulatie_2 {
                 //set betaalwijze voor persoon
                 persoon.setBetaalwijze(contant);
                 persoon.getBetaalwijze().setSaldo(5);
-                persoon.setVoornaam("voornaam");
+                persoon.setVoornaam("John");
+                persoon.setAchternaam("Doh");
+                persoon.setGeslacht('M');
+                Datum datum = new Datum(1,1,2001);
+                persoon.setGeboortedatum(datum);
                 //TODO tijdelijk !!
 
                     //koppel dienblad aan persoon
