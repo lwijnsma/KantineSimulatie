@@ -141,18 +141,18 @@ public class KantineSimulatie_2 {
                 * Medewerker 1 op 100
                  */
                 if (kans >= 0 && kans <= 89) { persoon = new Student(1, null, null, null,'M', "HBO-ICT", getRandomValue(100000,999999)); }
-                else if (kans >= 90 && kans <= 99) { persoon = new Docent(1, null, null, null,'M', "DOC","SCMI");
+                else if (kans >= 90 && kans < 99) { persoon = new Docent(1, null, null, null,'M', "DOC","SCMI");
                 }
-                else if (kans == 100) { persoon = new KantineMedewerker(1, null, null, null,'M', getRandomValue(100000,999999),false); }
+                else if (kans == 99) { persoon = new KantineMedewerker(1, null, null, null,'M', getRandomValue(100000,999999),false); }
                 else persoon = new Persoon();
-                Betaalwijze contant = new Contant();
+                Betaalwijze betaalwijze = new Contant();
 
                 //TODO tijdelijk !!
                 //set betaalwijze voor persoon
-                persoon.setBetaalwijze(contant);
+                persoon.setBetaalwijze(betaalwijze);
                 persoon.getBetaalwijze().setSaldo(5);
                 persoon.setVoornaam("John");
-                persoon.setAchternaam("Doh");
+                persoon.setAchternaam("Doe");
                 persoon.setGeslacht('M');
                 Datum datum = new Datum(1,1,2001);
                 persoon.setGeboortedatum(datum);
