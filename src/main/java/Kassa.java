@@ -25,19 +25,24 @@ public class Kassa {
         Betaalwijze betaalwijze = dienblad.getKlant().getBetaalwijze();
         Persoon klant = dienblad.getKlant();
         double tebetalen =0;
+
         while (artikelen.hasNext()) {
-        aantalTotaal++;
-        tebetalen += artikelen.next().getPrijs();
-        }
-        if(klant instanceof KortingskaartHouder){
-          if(((KortingskaartHouder) klant).heeftMaximum()){
-            double maximum = ((KortingskaartHouder) klant).geefMaximum();
-            double korting = tebetalen * ((KortingskaartHouder) klant).geefKortingsPercentage();
-            if(korting>maximum){
-              tebetalen = tebetalen - ((KortingskaartHouder) klant).geefMaximum();
-            }else tebetalen = tebetalen * ((KortingskaartHouder) klant).geefKortingsPercentage();
-          }
-          else tebetalen = tebetalen * ((KortingskaartHouder) klant).geefKortingsPercentage();
+            aantalTotaal++;
+            Artikel artikel = artikelen.next();
+            if (artikel.getKorting() != 0) {
+                tebetalen += (artikel.getPrijs() - artikel.getKorting());
+                break;
+            } else tebetalen += artikel.getPrijs();
+
+            if (klant instanceof KortingskaartHouder) {
+                if (((KortingskaartHouder) klant).heeftMaximum()) {
+                    double maximum = ((KortingskaartHouder) klant).geefMaximum();
+                    double korting = tebetalen * ((KortingskaartHouder) klant).geefKortingsPercentage();
+                    if (korting > maximum) {
+                        tebetalen = tebetalen - korting;
+                    } else tebetalen = tebetalen * ((KortingskaartHouder) klant).geefKortingsPercentage();
+                } else tebetalen = tebetalen * ((KortingskaartHouder) klant).geefKortingsPercentage();
+            }
         }
         try{
             betaalwijze.betaal(tebetalen);
