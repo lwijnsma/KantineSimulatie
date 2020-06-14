@@ -64,9 +64,9 @@ public class KantineSimulatie_2 {
      * Methode om een array van random getallen liggend tussen min en max van de gegeven lengte te
      * genereren
      *
-     * @param lengte
-     * @param min
-     * @param max
+     * @param lengte lengte van de gewenste array
+     * @param min minimum getal in de array
+     * @param max maximum getal in de array
      * @return De array met random getallen
      */
     private int[] getRandomArray(int lengte, int min, int max) {
@@ -81,8 +81,8 @@ public class KantineSimulatie_2 {
     /**
      * Methode om een random getal tussen min(incl) en max(incl) te genereren.
      *
-     * @param min
-     * @param max
+     * @param min minimum waarde
+     * @param max maximum waarde
      * @return Een random getal
      */
     private int getRandomValue(int min, int max) {
@@ -93,7 +93,7 @@ public class KantineSimulatie_2 {
      * Methode om op basis van een array van indexen voor de array artikelnamen de bijhorende array
      * van artikelnamen te maken
      *
-     * @param indexen
+     * @param indexen artikel index / artikkel nummer
      * @return De array met artikelnamen
      */
     private String[] geefArtikelNamen(int[] indexen) {
@@ -111,7 +111,7 @@ public class KantineSimulatie_2 {
      * Deze methode simuleert een aantal dagen
      * in het verloop van de kantine
      *
-     * @param dagen
+     * @param dagen het aantal dagen dat de simmulatie runt
      */
     public void simuleer(int dagen) {
         omzet = new double[dagen];
@@ -130,7 +130,7 @@ public class KantineSimulatie_2 {
               int aantalartikelen = getRandomValue(MIN_ARTIKELEN_PER_PERSOON, MAX_ARTIKELEN_PER_PERSOON);
 
                 //random int generator
-                int kans = random.nextInt(100);
+                int Persoonkans = random.nextInt(100);
 
                 Persoon persoon;
                 /*
@@ -140,10 +140,32 @@ public class KantineSimulatie_2 {
                 * Docent 10 op 100
                 * Medewerker 1 op 100
                  */
-                if (kans >= 1 && kans <= 89) { persoon = new Student(); }
-                else if (kans >= 90 && kans <= 99) { persoon = new Docent(); }
-                else if (kans == 100) { persoon = new KantineMedewerker(); }
+                if (Persoonkans >= 0 && Persoonkans <= 89) { persoon = new Student(1, null, null, null,'M', "HBO-ICT", getRandomValue(100000,999999)); }
+                else if (Persoonkans >= 90 && Persoonkans < 99) { persoon = new Docent(1, null, null, null,'M', "DOC","SCMI");
+                }
+                else if (Persoonkans == 99) { persoon = new KantineMedewerker(1, null, null, null,'M', getRandomValue(100000,999999),false); }
                 else persoon = new Persoon();
+
+                //maak random betaalwijze per persoon
+                int BetaalKans = random.nextInt(2);
+                Betaalwijze betaalwijze;
+                if(BetaalKans == 0){
+                    betaalwijze = new Pinpas();
+                    ((Pinpas) betaalwijze).setKredietLimiet(150);
+                }
+                else betaalwijze = new Contant();
+
+
+                //TODO tijdelijk !!
+                //set betaalwijze voor persoon
+                persoon.setBetaalwijze(betaalwijze);
+                persoon.getBetaalwijze().setSaldo(10);
+                persoon.setVoornaam("John");
+                persoon.setAchternaam("Doe");
+                persoon.setGeslacht('M');
+                Datum datum = new Datum(1,1,2001);
+                persoon.setGeboortedatum(datum);
+                //TODO tijdelijk !!
 
                     //koppel dienblad aan persoon
                     Dienblad dienblad = new Dienblad(persoon);
@@ -185,12 +207,11 @@ public class KantineSimulatie_2 {
         }
 
         //print de gemiddelden over de gesimmuleerde periode
-      Administratie administratie = new Administratie();
       System.out.println("---------- Gemiddelden ----------");
-      System.out.println("Gemiddelde omzet = " + df.format(administratie.berekenGemiddeldeOmzet(omzet)));
-      System.out.println("Gemiddeld aantal artikelen per dag = " + administratie.berekenGemiddeldAantal(aantal));
+      System.out.println("Gemiddelde omzet = " + df.format(Administratie.berekenGemiddeldeOmzet(omzet)));
+      System.out.println("Gemiddeld aantal artikelen per dag = " + Administratie.berekenGemiddeldAantal(aantal));
       System.out.println("Omzet totalen per dag:");
-      for(int i=0; i< administratie.berekenDagOmzet(omzet).length; i++){
+      for(int i = 0; i< Administratie.berekenDagOmzet(omzet).length; i++){
         String dag;
         // geef een naam aan elke dag
         switch(i){
@@ -204,8 +225,8 @@ public class KantineSimulatie_2 {
           default:dag = "";break;
         }
         //print dagnaam + dagtotaal
-        System.out.println(dag + df.format(administratie.berekenDagOmzet(omzet)[i]));
-      };
+        System.out.println(dag + df.format(Administratie.berekenDagOmzet(omzet)[i]));
+      }
     }
 
 

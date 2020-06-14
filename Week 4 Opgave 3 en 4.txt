@@ -1,0 +1,83 @@
+Opgave 3: Theorie over (abstracte) klassen en interfaces
+a.	Kun je een instantie maken van een interface via new ? Leg uit waarom het logisch is dat het welof niet kan.
+    Nee dat kan niet;
+
+b.	Herhaal de vorige vraag met abstracte klassen.
+    Nee dat kan niet;
+
+c.	Kan een klasse meerdere klassen overerven?
+    Ja
+
+d.  Kan een klasse meerdere interfaces implementeren?
+    Ja
+
+e.	Kan een klasse tegelijk een klasse overerven en interfaces implementeren?
+    Ja
+
+f.	Klopt de stelling dat elke methode in een interface abstract is? Licht je antwoord toe.
+    Nee er kunnen ook public classes in een interface zitten
+
+g.	Moet een klasse abstract zijn als minstens één methode abstract is? Licht je antwoord toe.
+    Ja; 
+
+h.	Leg het begrip polymorfisme van klassen uit en geef twee voorbeelden (één met abstracte klas-sen en één met interfaces).
+    Polymorfisme betekend dat de klassen een methode op meerdere manieren kan gebruiken door overerving.
+    Voorbeeld 1 abstracte klasse:
+        abstract class Gitaar {
+            public abstract void welkMerk();
+            public void methode() {
+                System.out.println("Dit is een Gitaar");
+            }
+        }
+
+        class Fender extends Gitaar {
+            public void welkMerk() {
+                System.out.println("Het merk is een Fender")
+            }
+        }
+
+        class Klasse {
+            public static void main(String[] args) {
+                Fender fender = new Fender();
+                fender.welkMerk();
+                fender.methode();
+            }
+        }
+    Voorbeeld 2 Interface:
+        interface Gitaar {
+            public void welkMerk();
+            public void methode();
+        }
+
+        class Fender implements Gitaar {
+            public void welkMerk() {
+                System.out.println("Het merk is een Fender")
+            }
+            public void methode() {
+                System.out.println("Dit is een Gitaar");
+            }
+        }
+
+        class Klasse {
+            public static void main(String[] args) {
+                Fender fender = new Fender();
+                fender.welkMerk();
+                fender.methode();
+            }
+        }
+
+Opgave 4: Een paar doordenkers
+a.	Kan een klasse abstract zijn als geen enkele methode abstract is in die klasse? Probeer het eens uit. Leg waarom het logisch is dat dit wel of niet kan.
+    Ja; Een abstracte methode kan alleen gebruikt worden door een abstracte klasse, maar een abstracte klasse hoeft geen abstracte methode te hebben.
+
+b.	Moet een subklasse van een abstracte klasse altijd alle abstracte methodes implementeren? Leguit waarom het logisch is dat dit wel of niet kan.
+    Ja; Een abstracte methode heeft geen body en moet dus geimplementeerd worden.
+
+c.	Als een klasse niet alle methoden van een interface implementeert kun je iets doen om een(compiler)fout te voorkomen. Wat? Waarom is de oplossing logisch?
+    Dit kan voorkomen worden door de klasse die de interface implementeert een abstracte klasse is. Zolang er uiteindelijk wel een klasse is die deze methode implementeert.
+
+d.	Leg uit waarom het logisch is dat een instantie variabele niet abstract kan zijn.
+    Een abstracte variabele is ervoor om gebruikt te worden door een andere klasse, een instantie variabele is ervoor om alleen in die instantie gebruikt te worden.
+
+e.	(Uitdaging) Zoek uit wat een final methode is. Leg daarna uit waarom het logisch is dat een methode niet tegelijkertijd abstract en final kan zijn.
+    Een final methode is een methode die niet meer overridden kan worden door een andrere klasse. Omdat een abstracte klasse geen body heeft, kan deze dus niet abstract en final zijn.
