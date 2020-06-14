@@ -20,7 +20,7 @@
             -->
 
             <!-- The JDBC URL to the database instance -->
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/kantine?serverTimezone=EST" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/kantine" />
 
             <!-- PostgreSQL JDBC connection url example -->
             <!--
@@ -39,11 +39,11 @@
 
             <!-- The database username -->
             <!-- VERVANG DEZE WAARDEN MET DE GELDENDE WAARDEN OP JE EIGEN SYSTEEM -->
-            <property name="javax.persistence.jdbc.user" value="docent" />
+            <property name="javax.persistence.jdbc.user" value="project" />
 
             <!-- The database password -->
             <!-- VERVANG DEZE WAARDEN MET DE GELDENDE WAARDEN OP JE EIGEN SYSTEEM -->
-            <property name="javax.persistence.jdbc.password" value="hoppekee" />
+            <property name="javax.persistence.jdbc.password" value="8BgMA5PxP2MQfd" />
 
             <property name="hibernate.connection.charSet" value="UTF-8" />
             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
