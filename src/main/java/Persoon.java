@@ -5,8 +5,10 @@ public class Persoon {
     private String achternaam;
     private Datum geboortedatum;
     private char geslacht;
+    private Betaalwijze betaalwijze;
 
-    public Persoon() {} // Lege constructor
+
+  public Persoon() {} // Lege constructor
 
   /*
   *Consturctor van de klasse Persoon
@@ -71,5 +73,12 @@ public class Persoon {
         if (geslacht == 'M') return "Man";
         else if (geslacht == 'V') return "Vrouw";
         else return "Onbekend";
+    }
+    public Betaalwijze getBetaalwijze() {
+      return betaalwijze;
+    }
+
+    public void setBetaalwijze(Betaalwijze betaalwijze) {
+      this.betaalwijze = betaalwijze;
     }
 }
