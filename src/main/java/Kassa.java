@@ -24,7 +24,7 @@ public class Kassa {
      * @param dienblad van klant die moet afrekenen
      */
     public void rekenAf(Dienblad dienblad){
-        Factuur factuur = new Factuur(dienblad);
+        Factuur factuur = new Factuur(dienblad,LocalDate.now());
         double tebetalen = factuur.getTotaal() - factuur.getKorting();
         try{
             dienblad.getKlant().getBetaalwijze().betaal(tebetalen);
