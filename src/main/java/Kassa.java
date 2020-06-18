@@ -1,16 +1,21 @@
-import java.util.Iterator;
+import java.time.LocalDate;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 
 public class Kassa {
 
-    private int aantalTotaal;
     private double geldTotaal;
+    private double kortingTotaal;
     private KassaRij kassaRij;
+    private  EntityManager manager;
 
   /**
      * Constructor
      */
-    public Kassa(KassaRij kassaRij) {
+    public Kassa(KassaRij kassaRij,EntityManager manager) {
         this.kassaRij = kassaRij;
+        this.manager = manager;
+
     }
 
     /**
@@ -21,38 +26,33 @@ public class Kassa {
      * @param dienblad van klant die moet afrekenen
      */
     public void rekenAf(Dienblad dienblad){
-        Iterator<Artikel> artikelen = dienblad.getDienblad();
-        Betaalwijze betaalwijze = dienblad.getKlant().getBetaalwijze();
-        Persoon klant = dienblad.getKlant();
-        double tebetalen =0;
-
-        while (artikelen.hasNext()) {
-            aantalTotaal++;
-            Artikel artikel = artikelen.next();
-            if (artikel.getKorting() != 0) {
-                tebetalen += (artikel.getPrijs() - artikel.getKorting());
-                break;
-            } else tebetalen += artikel.getPrijs();
-
-            if (klant instanceof KortingskaartHouder) {
-                if (((KortingskaartHouder) klant).heeftMaximum()) {
-                    double maximum = ((KortingskaartHouder) klant).geefMaximum();
-                    double korting = tebetalen * ((KortingskaartHouder) klant).geefKortingsPercentage();
-                    if (korting > maximum) {
-                        tebetalen = tebetalen - korting;
-                    } else tebetalen = tebetalen * ((KortingskaartHouder) klant).geefKortingsPercentage();
-                } else tebetalen = tebetalen * ((KortingskaartHouder) klant).geefKortingsPercentage();
-            }
-        }
+        EntityTransaction transaction = null;
+        Factuur factuur = new Factuur(dienblad,LocalDate.now());
+        double tebetalen = factuur.getTotaal() - factuur.getKorting();
         try{
-            betaalwijze.betaal(tebetalen);
+            dienblad.getKlant().getBetaalwijze().betaal(tebetalen);
             geldTotaal += tebetalen;
+            kortingTotaal += factuur.getKorting();
+
+            // database transactie
+            transaction = manager.getTransaction();
+            transaction.begin();
+            manager.persist(factuur);
+            transaction.commit();
+
         }
-        catch (TeWeinigGeldException message){
-            System.out.println(klant.getVoornaam()+" "+message);
+        catch (TeWeinigGeldException ex){
+            System.out.println(dienblad.getKlant().getVoornaam()+" "+ex);
+            //rollback als de transactie mislukt is
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            ex.printStackTrace();
         }
 
     }
+
+
 
     /**
      * Geeft het aantal artikelen dat de kassa heeft gepasseerd, vanaf het moment dat de methode
@@ -60,14 +60,11 @@ public class Kassa {
      *
      * @return aantal artikelen
      */
-    public int aantalArtikelen() {
-        return aantalTotaal;
-    }
 
     /**
      * Geeft het totaalbedrag van alle artikelen die de kass zijn gepasseerd, vanaf het moment dat
      * de methode resetKassa is aangeroepen.
-     *
+     *keys
      * @return hoeveelheid geld in de kassa
      */
     public double hoeveelheidGeldInKassa() {
@@ -78,9 +75,11 @@ public class Kassa {
      * reset de waarden van het aantal gepasseerde artikelen en de totale hoeveelheid geld in de
      * kassa.
      */
+    public double totaalekorting(){return kortingTotaal;}
+
     public void resetKassa() {
-        aantalTotaal = 0;
         geldTotaal = 0;
+        kortingTotaal = 0;
     }
 
 }
