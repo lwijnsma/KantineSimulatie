@@ -6,7 +6,6 @@ public class Kantine {
     private Kassa kassa;
     private KassaRij kassarij;
     private KantineAanbod kantineaanbod;
-    private EntityManager manager;
 
     /**
      * Constructor

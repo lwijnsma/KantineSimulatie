@@ -202,15 +202,12 @@ public class KantineSimulatie {
             kantine.verwerkRijVoorKassa();
             // hier worden variabelen aangemaakt om later te printen en in een array te zetten
             double dagOmzet = kantine.getKassa().hoeveelheidGeldInKassa();
-            int dagVerkopen = kantine.getKassa().aantalArtikelen();
             //hier worden de hierboven gemaakte variabelen in een array gezet
             omzet[i] = dagOmzet;
-            aantal[i] = dagVerkopen;
             // druk de dagtotalen af en hoeveel personen binnen
             // zijn gekomen
             System.out.println("------ Dag totalen ------");
             System.out.println("Aantalpersonen = " + aantalpersonen);
-            System.out.println("Aantal artikelen = " + dagVerkopen);
             System.out.println("Hoeveelheid geld in kassa = " + df.format(dagOmzet));
             // reset de kassa voor de volgende dag
             kantine.getKassa().resetKassa();

@@ -1,6 +1,6 @@
 import java.time.LocalDate;
 import java.io.Serializable;
-import java.util.Iterator;
+import java.util.*;
 
 import javax.persistence.*;
 
@@ -10,6 +10,7 @@ public class Factuur implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "idFactuur")
     private Long id;
 
     @Column(name = "datum")
@@ -21,8 +22,7 @@ public class Factuur implements Serializable {
     @Column(name = "totaal")
     private double totaal;
 
-    @Column(name = "aantalArtikelen")
-    private int aantalArtikelen;
+    private ArrayList<FactuurRegel> regels = new ArrayList<>();
 
     public Factuur() {
         totaal = 0;
@@ -42,8 +42,10 @@ public class Factuur implements Serializable {
         double kaarthouderKorting = 0.00;
 
         while (artikelen.hasNext()) {
-            aantalArtikelen++;
             Artikel artikel = artikelen.next();
+            FactuurRegel regel = new FactuurRegel(this, artikel);
+            regels.add(regel);
+
             if (artikel.getKorting() != 0) {
                 double dagKorting = artikel.getKorting();
                 korting += dagKorting;
@@ -69,14 +71,8 @@ public class Factuur implements Serializable {
     @Override
     public String toString() {
         return "Factuur{" +
-                "datum=" + datum +
-                ", korting=" + korting +
-                ", totaal=" + totaal +
+                "regels=" + regels +
                 '}';
-    }
-
-    public int getAantalArtikelen() {
-        return aantalArtikelen;
     }
 
     /**

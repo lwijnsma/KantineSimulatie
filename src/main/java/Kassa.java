@@ -4,7 +4,6 @@ import javax.persistence.EntityTransaction;
 
 public class Kassa {
 
-    private int aantalTotaal;
     private double geldTotaal;
     private double kortingTotaal;
     private KassaRij kassaRij;
@@ -33,7 +32,6 @@ public class Kassa {
         try{
             dienblad.getKlant().getBetaalwijze().betaal(tebetalen);
             geldTotaal += tebetalen;
-            aantalTotaal += factuur.getAantalArtikelen();
             kortingTotaal += factuur.getKorting();
 
             // database transactie
@@ -43,10 +41,8 @@ public class Kassa {
             transaction.commit();
 
         }
-        catch (TeWeinigGeldException geld){
-            System.out.println(dienblad.getKlant().getVoornaam()+" "+geld);
-        }
-        catch(Exception ex){
+        catch (TeWeinigGeldException ex){
+            System.out.println(dienblad.getKlant().getVoornaam()+" "+ex);
             //rollback als de transactie mislukt is
             if (transaction != null) {
                 transaction.rollback();
@@ -64,9 +60,6 @@ public class Kassa {
      *
      * @return aantal artikelen
      */
-    public int aantalArtikelen() {
-        return aantalTotaal;
-    }
 
     /**
      * Geeft het totaalbedrag van alle artikelen die de kass zijn gepasseerd, vanaf het moment dat
@@ -85,7 +78,6 @@ public class Kassa {
     public double totaalekorting(){return kortingTotaal;}
 
     public void resetKassa() {
-        aantalTotaal = 0;
         geldTotaal = 0;
         kortingTotaal = 0;
     }
