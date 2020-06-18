@@ -1,6 +1,6 @@
-import net.bytebuddy.asm.Advice;
-
 import java.time.LocalDate;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 
 public class Kassa {
 
@@ -8,12 +8,15 @@ public class Kassa {
     private double geldTotaal;
     private double kortingTotaal;
     private KassaRij kassaRij;
+    private  EntityManager manager;
 
   /**
      * Constructor
      */
-    public Kassa(KassaRij kassaRij) {
+    public Kassa(KassaRij kassaRij,EntityManager manager) {
         this.kassaRij = kassaRij;
+        this.manager = manager;
+
     }
 
     /**
@@ -24,19 +27,36 @@ public class Kassa {
      * @param dienblad van klant die moet afrekenen
      */
     public void rekenAf(Dienblad dienblad){
+        EntityTransaction transaction = null;
         Factuur factuur = new Factuur(dienblad,LocalDate.now());
         double tebetalen = factuur.getTotaal() - factuur.getKorting();
         try{
             dienblad.getKlant().getBetaalwijze().betaal(tebetalen);
             geldTotaal += tebetalen;
             aantalTotaal += factuur.getAantalArtikelen();
-            kortingTotaal += factuur.getAantalArtikelen();
+            kortingTotaal += factuur.getKorting();
+
+            // database transactie
+            transaction = manager.getTransaction();
+            transaction.begin();
+            manager.persist(factuur);
+            transaction.commit();
+
         }
-        catch (TeWeinigGeldException message){
-            System.out.println(dienblad.getKlant().getVoornaam()+" "+message);
+        catch (TeWeinigGeldException geld){
+            System.out.println(dienblad.getKlant().getVoornaam()+" "+geld);
+        }
+        catch(Exception ex){
+            //rollback als de transactie mislukt is
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            ex.printStackTrace();
         }
 
     }
+
+
 
     /**
      * Geeft het aantal artikelen dat de kassa heeft gepasseerd, vanaf het moment dat de methode
@@ -51,7 +71,7 @@ public class Kassa {
     /**
      * Geeft het totaalbedrag van alle artikelen die de kass zijn gepasseerd, vanaf het moment dat
      * de methode resetKassa is aangeroepen.
-     *
+     *keys
      * @return hoeveelheid geld in de kassa
      */
     public double hoeveelheidGeldInKassa() {

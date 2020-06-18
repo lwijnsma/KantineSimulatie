@@ -61,7 +61,7 @@ public class KantineSimulatie {
      *
      */
     public KantineSimulatie() {
-        kantine = new Kantine();
+        kantine = new Kantine(manager);
         random = new Random();
         int[] hoeveelheden = getRandomArray(AANTAL_ARTIKELEN, MIN_ARTIKELEN_PER_SOORT, MAX_ARTIKELEN_PER_SOORT);
         kantineaanbod = new KantineAanbod(artikelnamen, artikelprijzen, hoeveelheden);
@@ -170,7 +170,7 @@ public class KantineSimulatie {
                 //TODO tijdelijk !!
                 //set betaalwijze voor persoon
                 persoon.setBetaalwijze(betaalwijze);
-                persoon.getBetaalwijze().setSaldo(10);
+                persoon.getBetaalwijze().setSaldo(100);
                 persoon.setVoornaam("John");
                 persoon.setAchternaam("Doe");
                 persoon.setGeslacht('M');
