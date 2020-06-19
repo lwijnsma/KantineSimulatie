@@ -32,3 +32,6 @@ Waar vind je eenStudentKaartterug in de database?
 Wat zou je hieruit kunnen afleiden met betrekking tot het gebruik en de functie van @Embeddable en @Embedded?
 
 Opgave 3: Transacties
+
+a.Een transactie wordt ook wel eenunit of atomicitygenoemd, waarbij atomiciteit in de contextvan databases „alles of niets” betekent. Vooruitkijkend op week 6, kan je voor de kantinesimu-latie een situatie bedenken waar je dit patroon zou kunnen toepassen?
+
