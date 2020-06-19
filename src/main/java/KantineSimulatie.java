@@ -235,6 +235,24 @@ public class KantineSimulatie {
         //print dagnaam + dagtotaal
         System.out.println(dag + df.format(Administratie.berekenDagOmzet(omzet)[i]));
       }
+
+      //print de sql queries
+      System.out.println("------ SQL queries ------");
+
+      // Queries
+      Double totaal = manager.createQuery("SELECT SUM(totaal)  FROM factuur", Double.class).getSingleResult();
+      Double totaalKorting = manager.createQuery("SELECT SUM(korting)  FROM factuur", Double.class).getSingleResult();
+      Double aantal = manager.createQuery("SELECT COUNT(totaal)  FROM factuur", Double.class).getSingleResult();
+      Double aantalKorting = manager.createQuery("SELECT COUNT(korting)  FROM factuur", Double.class).getSingleResult();
+      List<Double> topDrie = manager.createQuery("SELECT TOP 3 totaal  FROM factuur", Double.class).getResultList();
+
+      //output
+      System.out.println("De totale omzet = " + df.format(totaal));
+      System.out.println("De totale toegepaste korting = " + df.format(totaalKorting));
+      System.out.println("De gemiddelde omzet = " + df.format((totaal / aantal)));
+      System.out.println("De gemiddelde toegepaste korting = " + df.format((totaalKorting / aantalKorting)));
+      System.out.println("De top drie facturen zijn " + df.format(topDrie.get(0)) + " " + df.format(topDrie.get(1)) + " " + df.format(topDrie.get(2)));
+
         // Close the EntityManager
         manager.close();
         // NEVER FORGET TO CLOSE THE ENTITY_MANAGER_FACTORY
