@@ -1,0 +1,34 @@
+Opdracht 1:
+
+d. Lees de klassen Student, StudieInschrijvingen Telefoon door. Zou je al iets kunnen ver-tellen over het doel van de annotaties @Id,@Generated Value en @Column?
+@Id geeft aan de database door dat het een key iets.
+@Colum geeft aan welke colum in de database de data word opgeslagen
+@GeneratedValue geeft aan dat de value gegenereerd moet worden door de database
+
+e. Een viertal tabellen zullen nu in de database zijn aangemaakt, welke zijn deze?
+1
+2
+3
+4
+
+Opgrave 2: Relaties
+
+a. Het attribuut telefoons in de klasseStudentis geannoteerd met@OneToMany. Waarom zou hier @OneToMany en niet @OneToOne zijn gebruikt?
+een student kan meerdere telefoon nummers hebben
+
+b Het attribuut studies in de klasse Student is ook geannoteerd met @OneToMany, dit om-dat een student natuurlijk bij meerdere studies ingeschreven kan staan. In tegenstelling tot telefoons wordt hier geen @JoinTable annotatie gebruikt.
+
+Hoe wordt het verschil zichtbaar in de database? Let hier op de tabellen die zijn aange-maakt en de velden in de tabellen voor een Student en StudieInschrijving.
+
+
+Zou je een nadeel kunnen bedenken waarom voor de relaties Student en StudieInschrijving via studies geen @JoinTable is gebruikt?
+
+c.In de klasse StudieInschrijvingis het attribuut student met @ManyToOne geannoteerd. 
+Beschrijf hoe deze relatie in de database zichtbaar wordt?
+
+d.De klasse StudentKaart is geannoteerd met @Embeddab leen het attribuut kaart in de klasse Student met @Embedded.
+Waar vind je eenStudentKaartterug in de database?
+
+Wat zou je hieruit kunnen afleiden met betrekking tot het gebruik en de functie van @Embeddable en @Embedded?
+
+Opgave 3: Transacties
