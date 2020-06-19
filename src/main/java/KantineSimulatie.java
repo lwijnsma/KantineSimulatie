@@ -244,7 +244,7 @@ public class KantineSimulatie {
       Double totaalKorting = manager.createQuery("SELECT SUM(korting)  FROM factuur", Double.class).getSingleResult();
       Double aantal = manager.createQuery("SELECT COUNT(totaal)  FROM factuur", Double.class).getSingleResult();
       Double aantalKorting = manager.createQuery("SELECT COUNT(korting)  FROM factuur", Double.class).getSingleResult();
-      List<Double> topDrie = manager.createQuery("SELECT TOP 3 totaal  FROM factuur", Double.class).getResultList();
+      List<Double> topDrie = manager.createQuery("SELECT TOP 3 totaal  FROM factuur ORDER BY totaal DESC", Double.class).getResultList();
 
       //output
       System.out.println("De totale omzet = " + df.format(totaal));
