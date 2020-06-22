@@ -31,7 +31,7 @@ public class Kassa {
             Artikel artikel = artikelen.next();
             if (artikel.getKorting() != 0) {
                 tebetalen += (artikel.getPrijs() - artikel.getKorting());
-                break;
+                continue;
             } else tebetalen += artikel.getPrijs();
 
             if (klant instanceof KortingskaartHouder) {

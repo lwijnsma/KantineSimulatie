@@ -5,12 +5,10 @@
     <persistence-unit name="KantineSimulatie">
         <class>Factuur</class>
         <properties>
-            <!-- The JDBC driver of your database -->
-            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/kantine?useLegacyDatetimeCode=false&amp;serverTimezone=Europe/Amsterdam" />
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://mysql.lwijnsma.nl:3306/kantine" />
             <property name="javax.persistence.jdbc.user" value="project" />
             <property name="javax.persistence.jdbc.password" value="8BgMA5PxP2MQfd" />
-
             <property name="hibernate.connection.charSet" value="UTF-8" />
             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
         </properties>
