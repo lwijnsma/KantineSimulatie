@@ -5,7 +5,7 @@ import java.io.Serializable;
 @Embeddable
 public class Artikel implements Serializable {
 
-    @Column(name = "Artikel_naam")
+    @Column(name = "artikel_naam")
     private String naam;
     @Column(name = "artikel_prijs")
     private double prijs;
