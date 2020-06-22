@@ -6,7 +6,7 @@ b.	Herhaal de vorige vraag met abstracte klassen.
     Nee dat kan niet;
 
 c.	Kan een klasse meerdere klassen overerven?
-    Ja
+    Nee //stond ja
 
 d.  Kan een klasse meerdere interfaces implementeren?
     Ja
@@ -15,7 +15,7 @@ e.	Kan een klasse tegelijk een klasse overerven en interfaces implementeren?
     Ja
 
 f.	Klopt de stelling dat elke methode in een interface abstract is? Licht je antwoord toe.
-    Nee er kunnen ook public classes in een interface zitten
+    Nee er kunnen ook public methodes* in een interface zitten
 
 g.	Moet een klasse abstract zijn als minstens één methode abstract is? Licht je antwoord toe.
     Ja; 

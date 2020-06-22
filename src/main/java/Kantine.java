@@ -20,9 +20,13 @@ public class Kantine {
      * @param dienblad, artikelnamen[]
      */
 
-    public void loopPakSluitAan(Dienblad dienblad,String[] artikelnamen) {
+    public void loopPakSluitAan(Dienblad dienblad,String[] artikelnamen,String dagaanbieding) {
         for (String artikelnaam : artikelnamen) {
-            dienblad.voegToe(kantineaanbod.getArtikel(artikelnaam));
+            Artikel artikel = kantineaanbod.getArtikel(artikelnaam);
+            if(artikel.getNaam().equals(dagaanbieding)){
+                artikel.setKorting((artikel.getPrijs()*0.2));
+            }
+            dienblad.voegToe(artikel);
         }
         kassarij.sluitAchteraan(dienblad);
     }
