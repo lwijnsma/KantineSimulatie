@@ -40,13 +40,22 @@ public class Factuur implements Serializable {
     private void verwerkBestelling(Dienblad dienblad){
         Iterator<Artikel> artikelen = dienblad.getDienblad();
         Persoon klant = dienblad.getKlant();
+        //hier word de tijdelijke kaarhouder korting variabele geinitaliseerd i.v.m. maximum
         double kaarthouderKorting = 0.00;
 
+        // loopt door de artikelen op het dienblad
         while (artikelen.hasNext()) {
             Artikel artikel = artikelen.next();
+            //word een factuur regel gemaakt voor het betrefende artikel
             FactuurRegel regel = new FactuurRegel(this, artikel);
             regels.add(regel);
 
+            /*
+             * kijkt of er dag korting is
+             * als er dagkorting is word die togepast en gaat de loop verder
+             * als die er niet is word er gekeken of er recht is op kortingskaart houder korting en word dat toegepast
+             * als dart er niet is word de normale prijs gerekend.
+             */
             if (artikel.getKorting() != 0) {
                 double dagKorting = artikel.getKorting();
                 korting += dagKorting;
@@ -56,6 +65,8 @@ public class Factuur implements Serializable {
                 totaal += artikel.getPrijs();
             }else totaal += artikel.getPrijs();
         }
+
+        //hier word gekeken of er een maximum kaart houder korting is en daarom gehandhaafd
 
         if(klant instanceof KortingskaartHouder && ((KortingskaartHouder) klant).heeftMaximum()){
             if(kaarthouderKorting > ((KortingskaartHouder) klant).geefMaximum()){

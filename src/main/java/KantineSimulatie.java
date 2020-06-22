@@ -1,10 +1,8 @@
 import java.text.DecimalFormat;
 import java.util.*;
-import javax.persistence.TypedQuery;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.EntityManagerFactory;
 
 public class KantineSimulatie {
@@ -123,11 +121,16 @@ public class KantineSimulatie {
     public void simuleer(int dagen) {
         omzet = new double[dagen];
         aantal = new int[dagen];
+
         // for lus voor dagen
         for(int i = 0; i < dagen; i++) {
             System.out.println("------ dag "+(i+1)+" ------");
             // bedenk hoeveel personen vandaag binnen lopen
             int aantalpersonen = getRandomValue(MIN_PERSONEN_PER_DAG, MAX_PERSONEN_PER_DAG);
+
+            //uncomment om de simulatie sneller te laten lopen
+            //en comment de andere variabele aantalpersonen
+            //int aantalpersonen = 10;
 
             int dagKorting = random.nextInt(3);
 
@@ -165,16 +168,17 @@ public class KantineSimulatie {
                 else betaalwijze = new Contant();
 
 
-                //TODO tijdelijk !!
+
                 //set betaalwijze voor persoon
                 persoon.setBetaalwijze(betaalwijze);
+                //TODO tijdelijke gegevens voor binnenkomende personen
                 persoon.getBetaalwijze().setSaldo(100);
                 persoon.setVoornaam("John");
                 persoon.setAchternaam("Doe");
                 persoon.setGeslacht('M');
                 Datum datum = new Datum(1,1,2001);
                 persoon.setGeboortedatum(datum);
-                //TODO tijdelijk !!
+                //tot hier de tijdelijke gegevens
 
                     //koppel dienblad aan persoon
                     Dienblad dienblad = new Dienblad(persoon);
@@ -215,7 +219,6 @@ public class KantineSimulatie {
         //print de gemiddelden over de gesimmuleerde periode
       System.out.println("---------- Gemiddelden ----------");
       System.out.println("Gemiddelde omzet = " + df.format(Administratie.berekenGemiddeldeOmzet(omzet)));
-      System.out.println("Gemiddeld aantal artikelen per dag = " + Administratie.berekenGemiddeldAantal(aantal));
       System.out.println("Omzet totalen per dag:");
       for(int i = 0; i< Administratie.berekenDagOmzet(omzet).length; i++){
         String dag;
@@ -238,18 +241,23 @@ public class KantineSimulatie {
       System.out.println("------ SQL queries ------");
 
       // Queries
-      Double totaal = manager.createQuery("SELECT SUM(totaal)  FROM Factuur", Double.class).getSingleResult();
-      Double totaalKorting = manager.createQuery("SELECT SUM(korting)  FROM Factuur", Double.class).getSingleResult();
-      Double aantal = manager.createQuery("SELECT COUNT(totaal)  FROM Factuur", Double.class).getSingleResult();
-      Double aantalKorting = manager.createQuery("SELECT COUNT(korting)  FROM Factuur", Double.class).getSingleResult();
-      List<Double> topDrie = manager.createQuery("SELECT totaal FROM Factuur ORDER BY totaal", Double.class).setMaxResults(3).getResultList();
+      Double totaal = (double) manager.createQuery("SELECT SUM(totaal)  FROM Factuur").getSingleResult();
+      Query totaalKortingQuery = manager.createQuery("SELECT SUM(korting)  FROM Factuur");
+      Query aantalQuery = manager.createQuery("SELECT COUNT(totaal)  FROM Factuur");
+      Query aantalKortingQuery = manager.createQuery("SELECT COUNT(korting)  FROM Factuur");
+      Query topDrieQuery = manager.createQuery("SELECT totaal FROM Factuur ORDER BY totaal DESC");
+
+      Double totaalKorting = (Double) totaalKortingQuery.getSingleResult();
+      Long aantal = (Long) aantalQuery.getSingleResult();
+      Long aantalKorting = (Long) aantalKortingQuery.getSingleResult();
+      List<Double> topDrie =topDrieQuery .setMaxResults(3).getResultList();
 
       //output
       System.out.println("De totale omzet = " + df.format(totaal));
       System.out.println("De totale toegepaste korting = " + df.format(totaalKorting));
       System.out.println("De gemiddelde omzet = " + df.format((totaal / aantal)));
       System.out.println("De gemiddelde toegepaste korting = " + df.format((totaalKorting / aantalKorting)));
-      System.out.println("De top drie facturen zijn " + df.format(topDrie.get(0)) + " " + df.format(topDrie.get(1)) + " " + df.format(topDrie.get(2)));
+      System.out.println("De top drie facturen zijn " + df.format(topDrie.get(0)) + " euro, " + df.format(topDrie.get(1)) + " euro en " + df.format(topDrie.get(2)) + " euro ");
 
         // Close the EntityManager
         manager.close();

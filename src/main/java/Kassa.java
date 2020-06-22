@@ -27,8 +27,10 @@ public class Kassa {
      */
     public void rekenAf(Dienblad dienblad){
         EntityTransaction transaction = null;
+        //hier word de factuur voor de kalnt aangemaakt
         Factuur factuur = new Factuur(dienblad,LocalDate.now());
         double tebetalen = factuur.getTotaal() - factuur.getKorting();
+        //hier word de factuuir afgerekend en naar de database gezet
         try{
             dienblad.getKlant().getBetaalwijze().betaal(tebetalen);
             geldTotaal += tebetalen;
@@ -41,6 +43,7 @@ public class Kassa {
             transaction.commit();
 
         }
+        //hier word gekeken of de klant kan betalen zo niet word de database transactie terug gezet
         catch (TeWeinigGeldException ex){
             System.out.println(dienblad.getKlant().getVoornaam()+" "+ex);
             //rollback als de transactie mislukt is

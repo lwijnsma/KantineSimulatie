@@ -6,10 +6,10 @@ d. Lees de klassen Student, StudieInschrijvingen Telefoon door. Zou je al iets k
 @GeneratedValue geeft aan dat de value gegenereerd moet worden door de database
 
 e. Een viertal tabellen zullen nu in de database zijn aangemaakt, welke zijn deze?
-1
-2
-3
-4
+1 student
+2 student_telefoon
+3 studie
+4 telefoon
 
 Opgrave 2: Relaties
 
@@ -18,7 +18,7 @@ een student kan meerdere telefoon nummers hebben
 
 b Het attribuut studies in de klasse Student is ook geannoteerd met @OneToMany, dit om-dat een student natuurlijk bij meerdere studies ingeschreven kan staan. In tegenstelling tot telefoons wordt hier geen @JoinTable annotatie gebruikt.
 
-Hoe wordt het verschil zichtbaar in de database? Let hier op de tabellen die zijn aange-maakt en de velden in de tabellen voor een Student en StudieInschrijving.
+Hoe wordt het verschil zichtbaar in de database? Let hier op de tabellen die zijn aangemaakt en de velden in de tabellen voor een Student en StudieInschrijving.
 
 
 Zou je een nadeel kunnen bedenken waarom voor de relaties Student en StudieInschrijving via studies geen @JoinTable is gebruikt?

@@ -23,6 +23,11 @@ public class FactuurRegel implements Serializable {
         this.artikel = artikel;
     }
 
+    /**
+     *
+     * om een bon mee te kunnen printen waar nodig
+     * @return sting versie van de factuur regel
+     */
     @Override
     public String toString() {
         return "FactuurRegel{" +
