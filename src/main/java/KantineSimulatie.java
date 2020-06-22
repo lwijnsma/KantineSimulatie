@@ -61,6 +61,7 @@ public class KantineSimulatie {
      *
      */
     public KantineSimulatie() {
+        manager = ENTITY_MANAGER_FACTORY.createEntityManager();
         kantine = new Kantine(manager);
         random = new Random();
         int[] hoeveelheden = getRandomArray(AANTAL_ARTIKELEN, MIN_ARTIKELEN_PER_SOORT, MAX_ARTIKELEN_PER_SOORT);
@@ -120,9 +121,6 @@ public class KantineSimulatie {
      * @param dagen het aantal dagen dat de simmulatie runt
      */
     public void simuleer(int dagen) {
-        // Create an EntityManager
-        manager = ENTITY_MANAGER_FACTORY.createEntityManager();
-
         omzet = new double[dagen];
         aantal = new int[dagen];
         // for lus voor dagen
@@ -240,7 +238,7 @@ public class KantineSimulatie {
       System.out.println("------ SQL queries ------");
 
       // Queries
-      Double totaal = manager.createQuery("SELECT SUM(totaal)  FROM factuur", Double.class).getSingleResult();
+      Double totaal = manager.createQuery("SELECT SUM(totaal)  FROM factuur totaal", Double.class).getSingleResult();
       Double totaalKorting = manager.createQuery("SELECT SUM(korting)  FROM factuur", Double.class).getSingleResult();
       Double aantal = manager.createQuery("SELECT COUNT(totaal)  FROM factuur", Double.class).getSingleResult();
       Double aantalKorting = manager.createQuery("SELECT COUNT(korting)  FROM factuur", Double.class).getSingleResult();

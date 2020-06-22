@@ -23,15 +23,15 @@ Hoe wordt het verschil zichtbaar in de database? Let hier op de tabellen die zij
 
 Zou je een nadeel kunnen bedenken waarom voor de relaties Student en StudieInschrijving via studies geen @JoinTable is gebruikt?
 
-c.In de klasse StudieInschrijvingis het attribuut student met @ManyToOne geannoteerd. 
+c.In de klasse StudieInschrijving is het attribuut student met @ManyToOne geannoteerd.
 Beschrijf hoe deze relatie in de database zichtbaar wordt?
 
 d.De klasse StudentKaart is geannoteerd met @Embeddab leen het attribuut kaart in de klasse Student met @Embedded.
-Waar vind je eenStudentKaartterug in de database?
+Waar vind je een StudentKaart terug in de database?
 
 Wat zou je hieruit kunnen afleiden met betrekking tot het gebruik en de functie van @Embeddable en @Embedded?
 
 Opgave 3: Transacties
 
-a.Een transactie wordt ook wel eenunit of atomicitygenoemd, waarbij atomiciteit in de contextvan databases „alles of niets” betekent. Vooruitkijkend op week 6, kan je voor de kantinesimu-latie een situatie bedenken waar je dit patroon zou kunnen toepassen?
+a.Een transactie wordt ook wel een  unit of atomicity genoemd, waarbij atomiciteit in de contextvan databases „alles of niets” betekent. Vooruitkijkend op week 6, kan je voor de kantinesimulatie een situatie bedenken waar je dit patroon zou kunnen toepassen?
 
