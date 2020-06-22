@@ -1,16 +1,24 @@
 public class Artikel {
 
     private String naam;
-    private Double prijs;
+    private double prijs;
+    private double korting;
 
-    public Artikel(String naam, Double prijs) {
+    public Artikel(String naam, double prijs, double korting) {
         this.naam = naam;
         this.prijs = prijs;
+        this.korting = korting;
     }
 
-  public Artikel(){
+    public Artikel(String naam, double prijs) {
+        this.naam = naam;
+        this.prijs = prijs;
+        this.korting = 0.00;
+    }
 
-  }
+    public Artikel() {
+
+    }
 
     public String toString() {
         return naam + " " + prijs;
@@ -24,13 +32,11 @@ public class Artikel {
         this.naam = naam;
     }
 
-    public Double getPrijs() {
-        return prijs;
-    }
+    public double getPrijs() { return prijs; }
 
-    public void setPrijs(Double prijs) {
-        this.prijs = prijs;
-    }
+    public void setPrijs(double prijs) { this.prijs = prijs; }
 
+    public double getKorting() { return korting; }
 
+    public void setKorting(double korting) { this.korting = korting; }
 }
