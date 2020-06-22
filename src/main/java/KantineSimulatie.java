@@ -1,5 +1,7 @@
+import java.sql.ResultSet;
 import java.text.DecimalFormat;
 import java.util.*;
+import java.util.stream.Stream;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.EntityManager;
@@ -126,11 +128,11 @@ public class KantineSimulatie {
         for(int i = 0; i < dagen; i++) {
             System.out.println("------ dag "+(i+1)+" ------");
             // bedenk hoeveel personen vandaag binnen lopen
-            int aantalpersonen = getRandomValue(MIN_PERSONEN_PER_DAG, MAX_PERSONEN_PER_DAG);
+            //int aantalpersonen = getRandomValue(MIN_PERSONEN_PER_DAG, MAX_PERSONEN_PER_DAG);
 
             //uncomment om de simulatie sneller te laten lopen
             //en comment de andere variabele aantalpersonen
-            //int aantalpersonen = 10;
+            int aantalpersonen = 10;
 
             int dagKorting = random.nextInt(3);
 
@@ -243,18 +245,22 @@ public class KantineSimulatie {
 
       //print de sql queries
       System.out.println("------ SQL queries ------");
-
-      // Queries
+      // Queries opgave 3
       Double totaal = (double) manager.createQuery("SELECT SUM(totaal)  FROM Factuur").getSingleResult();
       Query totaalKortingQuery = manager.createQuery("SELECT SUM(korting)  FROM Factuur");
       Query aantalQuery = manager.createQuery("SELECT COUNT(totaal)  FROM Factuur");
       Query aantalKortingQuery = manager.createQuery("SELECT COUNT(korting)  FROM Factuur");
       Query topDrieQuery = manager.createQuery("SELECT totaal FROM Factuur ORDER BY totaal DESC");
+      // Queries opgave 5
+      Query kortingArtikel = manager.createQuery("SELECT artikel.naam, SUM(artikel.korting)  FROM FactuurRegel GROUP BY artikel.naam");
+      Query kortingArtikelDag = manager.createQuery("SELECT fr.artikel.naam, SUM(fr.artikel.korting), f.datum FROM FactuurRegel fr, Factuur f GROUP BY f.datum");
+      Query popArtikelDag = manager.createQuery("SELECT artikel.naam, COUNT(artikel.naam)  FROM FactuurRegel ORDER BY COUNT(artikel.naam) DESC");
+      Query highomzet = manager.createQuery("SELECT artikel.naam, SUM(artikel.prijs) FROM FactuurRegel ORDER BY SUM(artikel.prijs) DESC");
 
       Double totaalKorting = (Double) totaalKortingQuery.getSingleResult();
       Long aantal = (Long) aantalQuery.getSingleResult();
       Long aantalKorting = (Long) aantalKortingQuery.getSingleResult();
-      List<Double> topDrie =topDrieQuery .setMaxResults(3).getResultList();
+      List<Double> topDrie = topDrieQuery.setMaxResults(3).getResultList();
 
       //output
       System.out.println("De totale omzet = " + df.format(totaal));
@@ -262,6 +268,11 @@ public class KantineSimulatie {
       System.out.println("De gemiddelde omzet = " + df.format((totaal / aantal)));
       System.out.println("De gemiddelde toegepaste korting = " + df.format((totaalKorting / aantalKorting)));
       System.out.println("De top drie facturen zijn " + df.format(topDrie.get(0)) + " euro, " + df.format(topDrie.get(1)) + " euro en " + df.format(topDrie.get(2)) + " euro ");
+
+      //System.out.println("De meest toegepaste kortingen per artikel zijn ");
+      //System.out.println("De meest toegepaste kortingen per artikel per dag zijn ");
+      //System.out.println("De top drie populaire artikelen zijn " + df.format(toppop.get(0)) + " " + df.format(toppop.get(1)) + " " + df.format(toppop.get(2)));
+      //System.out.println("De top drie artikelen per omzet " + df.format(topOmzet.get(0)) + " " + df.format(topOmzet.get(1)) + " " + df.format(topOmzet.get(2)));
 
         // Close the EntityManager
         manager.close();
