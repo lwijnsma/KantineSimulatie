@@ -6,6 +6,7 @@ public class Kassa {
 
     private double geldTotaal;
     private double kortingTotaal;
+    private int aantalArtikelen;
     private KassaRij kassaRij;
     private  EntityManager manager;
 
@@ -35,6 +36,7 @@ public class Kassa {
             dienblad.getKlant().getBetaalwijze().betaal(tebetalen);
             geldTotaal += tebetalen;
             kortingTotaal += factuur.getKorting();
+            aantalArtikelen += factuur.getAantalArtikelen();
 
             // database transactie
             transaction = manager.getTransaction();
@@ -80,9 +82,12 @@ public class Kassa {
      */
     public double totaalekorting(){return kortingTotaal;}
 
+    public int getAantalArtikelen() { return aantalArtikelen; }
+
     public void resetKassa() {
         geldTotaal = 0;
         kortingTotaal = 0;
+        aantalArtikelen = 0;
     }
 
 }

@@ -204,12 +204,15 @@ public class KantineSimulatie {
             kantine.verwerkRijVoorKassa();
             // hier worden variabelen aangemaakt om later te printen en in een array te zetten
             double dagOmzet = kantine.getKassa().hoeveelheidGeldInKassa();
+            int dagVerkopen = kantine.getKassa().getAantalArtikelen();
             //hier worden de hierboven gemaakte variabelen in een array gezet
             omzet[i] = dagOmzet;
+            aantal[i] = dagVerkopen;
             // druk de dagtotalen af en hoeveel personen binnen
             // zijn gekomen
             System.out.println("------ Dag totalen ------");
             System.out.println("Aantalpersonen = " + aantalpersonen);
+            System.out.println("Aantal artikelen = " + dagVerkopen);
             System.out.println("Hoeveelheid geld in kassa = " + df.format(dagOmzet));
             // reset de kassa voor de volgende dag
             kantine.getKassa().resetKassa();
@@ -217,25 +220,26 @@ public class KantineSimulatie {
         }
 
         //print de gemiddelden over de gesimmuleerde periode
-      System.out.println("---------- Gemiddelden ----------");
-      System.out.println("Gemiddelde omzet = " + df.format(Administratie.berekenGemiddeldeOmzet(omzet)));
-      System.out.println("Omzet totalen per dag:");
-      for(int i = 0; i< Administratie.berekenDagOmzet(omzet).length; i++){
-        String dag;
-        // geef een naam aan elke dag
-        switch(i){
-          case 0:dag = "Maandag ";break;
-          case 1:dag = "Dinsdag ";break;
-          case 2:dag = "Woendsdag ";break;
-          case 3:dag = "Donderdag ";break;
-          case 4:dag = "Vrijdag ";break;
-          case 5:dag = "Zaterdag ";break;
-          case 6:dag = "Zondag ";break;
-          default:dag = "";break;
+        System.out.println("---------- Gemiddelden ----------");
+        System.out.println("Gemiddelde omzet = " + df.format(Administratie.berekenGemiddeldeOmzet(omzet)));
+        System.out.println("Gemiddeld aantal artikelen per dag = " + Administratie.berekenGemiddeldAantal(aantal));
+        System.out.println("Omzet totalen per dag:");
+        for(int i = 0; i< Administratie.berekenDagOmzet(omzet).length; i++) {
+            String dag;
+            // geef een naam aan elke dag
+            switch (i) {
+                case 0: dag = "Maandag ";break;
+                case 1: dag = "Dinsdag ";break;
+                case 2: dag = "Woendsdag ";break;
+                case 3: dag = "Donderdag ";break;
+                case 4: dag = "Vrijdag ";break;
+                case 5: dag = "Zaterdag ";break;
+                case 6: dag = "Zondag ";break;
+                default: dag = "";break;
+            }
+            //print dagnaam + dagtotaal
+            System.out.println(dag + df.format(Administratie.berekenDagOmzet(omzet)[i]));
         }
-        //print dagnaam + dagtotaal
-        System.out.println(dag + df.format(Administratie.berekenDagOmzet(omzet)[i]));
-      }
 
       //print de sql queries
       System.out.println("------ SQL queries ------");

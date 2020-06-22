@@ -22,6 +22,9 @@ public class Factuur implements Serializable {
     @Column(name = "totaal")
     private double totaal;
 
+    @Column(name = "artikelen")
+    private int aantalArtikelen;
+
     @OneToMany(targetEntity = FactuurRegel.class, mappedBy = "factuur", cascade =  CascadeType.ALL, orphanRemoval = true)
     private List<FactuurRegel> regels = new ArrayList<>();
 
@@ -37,6 +40,8 @@ public class Factuur implements Serializable {
         verwerkBestelling(klant) ;
     }
 
+
+
     private void verwerkBestelling(Dienblad dienblad){
         Iterator<Artikel> artikelen = dienblad.getDienblad();
         Persoon klant = dienblad.getKlant();
@@ -45,6 +50,7 @@ public class Factuur implements Serializable {
 
         // loopt door de artikelen op het dienblad
         while (artikelen.hasNext()) {
+            aantalArtikelen++;
             Artikel artikel = artikelen.next();
             //word een factuur regel gemaakt voor het betrefende artikel
             FactuurRegel regel = new FactuurRegel(this, artikel);
@@ -86,7 +92,9 @@ public class Factuur implements Serializable {
                 "regels=" + regels +
                 '}';
     }
-
+    public int getAantalArtikelen() {
+        return aantalArtikelen;
+    }
     /**
      *
      * @return de korting
