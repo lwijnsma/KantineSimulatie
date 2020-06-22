@@ -238,11 +238,11 @@ public class KantineSimulatie {
       System.out.println("------ SQL queries ------");
 
       // Queries
-      Double totaal = manager.createQuery("SELECT SUM(totaal)  FROM factuur totaal", Double.class).getSingleResult();
-      Double totaalKorting = manager.createQuery("SELECT SUM(korting)  FROM factuur", Double.class).getSingleResult();
-      Double aantal = manager.createQuery("SELECT COUNT(totaal)  FROM factuur", Double.class).getSingleResult();
-      Double aantalKorting = manager.createQuery("SELECT COUNT(korting)  FROM factuur", Double.class).getSingleResult();
-      List<Double> topDrie = manager.createQuery("SELECT TOP 3 totaal  FROM factuur ORDER BY totaal DESC", Double.class).getResultList();
+      Double totaal = manager.createQuery("SELECT SUM(totaal)  FROM Factuur", Double.class).getSingleResult();
+      Double totaalKorting = manager.createQuery("SELECT SUM(korting)  FROM Factuur", Double.class).getSingleResult();
+      Double aantal = manager.createQuery("SELECT COUNT(totaal)  FROM Factuur", Double.class).getSingleResult();
+      Double aantalKorting = manager.createQuery("SELECT COUNT(korting)  FROM Factuur", Double.class).getSingleResult();
+      List<Double> topDrie = manager.createQuery("SELECT totaal FROM Factuur ORDER BY totaal", Double.class).setMaxResults(3).getResultList();
 
       //output
       System.out.println("De totale omzet = " + df.format(totaal));
